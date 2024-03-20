@@ -1,0 +1,371 @@
+[
+  {
+    "name": "Main",
+    "icon": "/home/camille/PFP.png",
+    "shortcut": "<Control><Super>space",
+    "centered": false,
+    "id": 0,
+    "children": [
+      {
+        "name": "SYSTEM",
+        "icon": "org.remmina.Remmina",
+        "type": "CustomMenu",
+        "children": [
+          {
+            "name": "Fly-Pie Settings",
+            "icon": "xapp-prefs-plugins-symbolic",
+            "type": "Command",
+            "data": "gnome-extensions prefs flypie@schneegans.github.com",
+            "angle": -1
+          },
+          {
+            "name": "Devices",
+            "icon": "usb-creator-gtk-symbolic",
+            "type": "Devices",
+            "angle": -1,
+            "data": {},
+            "showLabels": false
+          },
+          {
+            "name": "Running Apps",
+            "icon": "xapp-prefs-toolbar-symbolic",
+            "type": "RunningApps",
+            "data": {
+              "activeWorkspaceOnly": false,
+              "appGrouping": true,
+              "hoverPeeking": true,
+              "nameRegex": ""
+            },
+            "angle": -1,
+            "showLabels": false
+          },
+          {
+            "name": "System",
+            "icon": "xapp-prefs-behavior-symbolic",
+            "type": "System",
+            "angle": -1,
+            "data": {},
+            "showLabels": false
+          },
+          {
+            "name": "Settings",
+            "icon": "flypie-menu-system-settings-symbolic",
+            "type": "Command",
+            "data": {
+              "command": "gnome-control-center"
+            },
+            "angle": -1
+          }
+        ],
+        "angle": -1,
+        "data": {},
+        "showLabels": false
+      },
+      {
+        "name": "Comms",
+        "icon": "appimagekit-retroshare",
+        "type": "CustomMenu",
+        "children": [
+          {
+            "name": "Discord",
+            "icon": "discord",
+            "type": "Command",
+            "data": {
+              "command": "/usr/share/discord/Discord"
+            },
+            "angle": -1
+          },
+          {
+            "name": "OnionShare",
+            "icon": "browser-tor",
+            "type": "Command",
+            "data": {
+              "command": "alacritty -e \"bash -c onionshare-cli;bash\""
+            },
+            "angle": -1
+          },
+          {
+            "name": "Steam",
+            "icon": "steam",
+            "type": "Command",
+            "data": {
+              "command": "/usr/bin/steam %U"
+            },
+            "angle": -1
+          },
+          {
+            "name": "Tor Browser",
+            "icon": "com.github.micahflee.torbrowser-launcher",
+            "type": "Command",
+            "data": {
+              "command": "/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=torbrowser-launcher --file-forwarding org.torproject.torbrowser-launcher @@u %u @@"
+            },
+            "angle": -1
+          }
+        ],
+        "angle": -1,
+        "data": {},
+        "showLabels": false
+      },
+      {
+        "name": "Favorites",
+        "icon": "draw-star",
+        "type": "Favorites",
+        "data": {},
+        "angle": -1,
+        "showLabels": false
+      },
+      {
+        "name": "Media",
+        "icon": "applications-multimedia",
+        "type": "CustomMenu",
+        "children": [
+          {
+            "name": "Next",
+            "icon": "gtk-media-previous-rtl",
+            "type": "Shortcut",
+            "data": {
+              "shortcut": "MonBrightnessUp"
+            },
+            "angle": -1
+          },
+          {
+            "name": "Sound UP",
+            "icon": "go-up",
+            "type": "Shortcut",
+            "data": {
+              "shortcut": "AudioRaiseVolume"
+            },
+            "angle": -1
+          },
+          {
+            "name": "Play/Pause",
+            "icon": "info.smplayer.SMPlayer",
+            "type": "Shortcut",
+            "data": {
+              "shortcut": "TouchpadToggle"
+            },
+            "angle": -1
+          },
+          {
+            "name": "Mute Audio",
+            "icon": "audio-volume-muted",
+            "type": "Shortcut",
+            "data": {
+              "shortcut": "AudioMute"
+            },
+            "angle": -1
+          },
+          {
+            "name": "Sound DOWN",
+            "icon": "kdenlive-down",
+            "type": "Shortcut",
+            "data": {
+              "shortcut": "AudioLowerVolume"
+            },
+            "angle": -1
+          },
+          {
+            "name": "Previou",
+            "icon": "gtk-media-previous-ltr",
+            "type": "Shortcut",
+            "data": {
+              "shortcut": "MonBrightnessDown"
+            },
+            "angle": -1
+          }
+        ],
+        "angle": -1,
+        "data": {},
+        "showLabels": false
+      },
+      {
+        "name": "Tools",
+        "icon": "auth-fingerprint",
+        "type": "CustomMenu",
+        "children": [
+          {
+            "name": "HashCat",
+            "icon": "cryptfolder-indicator",
+            "type": "Command",
+            "data": {
+              "command": "alacritty -e \"bash -c 'hashcat --help';bash\""
+            },
+            "angle": -1
+          },
+          {
+            "name": "VeraCrypt",
+            "icon": "veracrypt",
+            "type": "Command",
+            "data": {
+              "command": "/usr/bin/veracrypt %f"
+            },
+            "angle": -1
+          },
+          {
+            "name": "Terminal",
+            "icon": "org.gnome.Terminal",
+            "type": "Command",
+            "data": {
+              "command": "alacritty -t \"(੭ˊᵕˋ)੭.*･｡ﾟ\""
+            },
+            "angle": -1
+          },
+          {
+            "name": "Kleopatra",
+            "icon": "org.kde.kleopatra",
+            "type": "Command",
+            "data": {
+              "command": "/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=kleopatra org.kde.kleopatra"
+            },
+            "angle": -1
+          },
+          {
+            "name": "VSCodium",
+            "icon": "com.vscodium.codium",
+            "type": "Command",
+            "data": {
+              "command": "/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=codium --file-forwarding com.vscodium.codium --unity-launch @@ %F @@"
+            },
+            "angle": -1
+          },
+          {
+            "name": "Wireshark",
+            "icon": "org.wireshark.Wireshark",
+            "type": "Command",
+            "data": {
+              "command": "wireshark %f"
+            },
+            "angle": -1
+          },
+          {
+            "name": "Airodump (wlo1)",
+            "icon": "io.github.hakandundar34coding.system-monitoring-center",
+            "type": "Command",
+            "data": {
+              "command": "alacritty -e \"bash -c 'sudo airodump-ng wlo1';bash\""
+            },
+            "angle": -1
+          },
+          {
+            "name": "Oracle VM VirtualBox",
+            "icon": "virtualbox",
+            "type": "Command",
+            "data": {
+              "command": "VirtualBox %U"
+            },
+            "angle": -1
+          },
+          {
+            "name": "HTOP",
+            "icon": "appimagekit-obsidian",
+            "type": "Command",
+            "data": {
+              "command": "alacritty -e \"bash -c 'btop';bash\""
+            },
+            "angle": -1
+          }
+        ],
+        "angle": -1,
+        "data": {},
+        "showLabels": false
+      },
+      {
+        "name": "Games",
+        "icon": "videogames",
+        "type": "CustomMenu",
+        "children": [
+          {
+            "name": "Scrap Mechanic",
+            "icon": "steam_icon_387990",
+            "type": "Command",
+            "data": {
+              "command": "steam steam://rungameid/387990"
+            },
+            "angle": -1
+          },
+          {
+            "name": "5D Chess With Multiverse Time Travel",
+            "icon": "steam_icon_1349230",
+            "type": "Command",
+            "data": {
+              "command": "steam steam://rungameid/1349230"
+            },
+            "angle": -1
+          },
+          {
+            "name": "Steam",
+            "icon": "steam",
+            "type": "Command",
+            "data": {
+              "command": "/usr/bin/steam %U"
+            },
+            "angle": -1
+          },
+          {
+            "name": "Minecraft",
+            "icon": "com.mojang.Minecraft",
+            "type": "Command",
+            "data": {
+              "command": "/home/camille/.minecraft/launcher/minecraft-launcher"
+            },
+            "angle": -1
+          },
+          {
+            "name": "Rain World",
+            "icon": "steam_icon_312520",
+            "type": "Command",
+            "data": {
+              "command": "steam steam://rungameid/312520"
+            },
+            "angle": -1
+          },
+          {
+            "name": "Stardew Valley",
+            "icon": "steam_icon_413150",
+            "type": "Command",
+            "data": {
+              "command": "steam steam://rungameid/413150"
+            },
+            "angle": -1
+          },
+          {
+            "name": "Summoners War: Chronicles",
+            "icon": "steam_icon_2167580",
+            "type": "Command",
+            "data": {
+              "command": "steam steam://rungameid/2167580"
+            },
+            "angle": -1
+          },
+          {
+            "name": "Trailmakers",
+            "icon": "steam_icon_585420",
+            "type": "Command",
+            "data": {
+              "command": "steam steam://rungameid/585420"
+            },
+            "angle": -1
+          },
+          {
+            "name": "Potion Craft: Alchemist Simulator",
+            "icon": "steam_icon_1210320",
+            "type": "Command",
+            "data": {
+              "command": "steam steam://rungameid/1210320"
+            },
+            "angle": -1
+          }
+        ],
+        "angle": -1,
+        "data": {},
+        "showLabels": false
+      }
+    ],
+    "type": "CustomMenu",
+    "data": {},
+    "touchButton": false,
+    "superRMB": true,
+    "showLabels": false
+  }
+]
