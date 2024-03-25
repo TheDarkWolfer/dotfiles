@@ -9,10 +9,10 @@ fi
 
 echo "[i] preparing installation..."
 pacman -Syu
-apt -y install npm golang
+pacman -S npm golang
 
 echo "[+] installing btop.."
-apt -y install btop
+pacman -S btop
 
 echo "[+] installing wego (make sure to provide a weather API key)..."
 go install github.com/schachmat/wego@latest"
@@ -21,30 +21,30 @@ echo "[+] installing cutefetch..."
 curl https://raw.githubusercontent.com/cybardev/cutefetch/main/cutefetch >> cutefetch.sh
 
 echo "[+] installing cbonsai..."
-apt -y install cbonsai
+pacman -S cbonsai
 
 echo "[+] installing chalk-animation..."
 npm install --global chalk-animation
 
 echo "[+] installing exa (ls replacement)..."
-apt -y install exa
+pacman -S exa
 
 echo "[+] installing alacritty..."
-apt -y install alacritty
+pacman -S alacritty
 cp ./alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
 
 echo "[+] installing polybar..."
-apt -y install polybar
+pacman -S polybar
 cp ./polybar/conf ~/.config/polybar/conf
 
 echo "[+] installing feh (for wallpapers)..."
-apt -y install feh
+pacman -S feh
 
 echo "[+] installing tty-clock..."
-apt -y install tty-clock
+pacman -S tty-clock
 
 echo "[+] installing/updating python v3"
-apt -y install python3
+pacman -S python3
 
 echo "[+] installing thefuck (shell corrector)"
 pip3 install thefuck
