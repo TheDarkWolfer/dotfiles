@@ -28,3 +28,17 @@ npm install --global chalk-animation
 
 echo "[+] installing exa (ls replacement)..."
 apt install exa
+
+echo "[+] installing alacritty..."
+apt install alacritty
+cp ./alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
+
+echo "[+] installing polybar..."
+apt install polybar
+cp ./polybar/conf ~/.config/polybar/conf
+
+echo "[+] installing feh (for wallpapers)..."
+apt install feh
+
+echo "[+] copying config files..."
+cp 
