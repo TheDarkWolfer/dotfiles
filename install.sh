@@ -41,4 +41,9 @@ echo "[+] installing feh (for wallpapers)..."
 apt install feh
 
 echo "[+] copying config files..."
-cp 
+cp ./i3/* ~/.config/i3/
+cp ./i3blocks/* ~/.config/i3blocks/
+cp ./i3status/* ~/.config/i3status/
+mkdir ~/.config/scripts
+cp ./scripts/* ~/.config/scripts/
+cp ~/flex.py ~/.config/scripts/flex.py
