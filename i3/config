@@ -34,7 +34,8 @@ exec --no-startup-id dex --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec_always --no-startup-id xset dpms 0 0 6000 &
+exec --no-startup-id xss-lock --transfer-sleep-lock -- /home/camille/.config/scripts/lock
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -42,16 +43,16 @@ exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym F3 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym F2 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym F1 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+#bindsym F1 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty -t \"(੭ˊᵕˋ)੭.*･｡ﾟ\"
+bindsym $mod+Return exec /home/camille/.scripts/terminal
 
 # kill focused window
 bindsym $mod+Shift+A kill
@@ -107,6 +108,11 @@ bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
+
+default_orientation vertical
+
+bindsym $mod+Shift+q split toggle kill
+for_window [class=".*"] split toggle
 
 # focus the parent container
 bindsym $mod+q focus parent
@@ -185,20 +191,26 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# Handle different screen events
+exec --no-startup-id /home/camille/.scripts/auto-screens
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-exec_always --no-startup-id ~/.config/polybar/launch.sh
+#exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec_always --no-startup-id ~/.config/polybar/launch.sh --shades
 exec "setxkbmap -layout fr,fr"
-exec_always picom -f --experimental-backends
+exec_always picom -f
 exec_always feh --bg-fill /home/$USER/.config/i3/pretty-scenery.png
 # Shortcut for Lockscreen
-bindsym $mod+x exec /home/$USER/.config/scripts/lock
+bindsym F9 exec ~/.config/scripts/lock
 bindsym $mod+c exec "alacritty -e sh -c '~/.config/scripts/clock; exec $SHELL' &"
-bindsym $mod+i exec "alacritty -e sh -c 'python3 ~/.scripts/flex.py; exec $SHELL' &"
+bindsym F12 exec "alacritty -e sh -c 'python3 ~/.scripts/flex.py; exec $SHELL' &"
 
 
 for_window [class="^.*"] border pixel 0
 
-bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date)"
-bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date)"
-bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date)"
+#bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date)"
+#bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date)"
+#bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date)"
+
+bindsym Print exec gnome-screenshot -i

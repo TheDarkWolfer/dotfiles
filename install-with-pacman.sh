@@ -1,12 +1,4 @@
 #!/bin/sh
-
-if [$UID != 0] then:
-	echo "You don't have sufficient privileges to run this script !"
-	echo "Please use 'sudo' or refer to your system admin for help"
-else:
-	echo "Sufficient permissions, proceeding..."
-fi
-
 echo "[i] preparing installation..."
 pacman -Syu
 pacman -S npm golang
