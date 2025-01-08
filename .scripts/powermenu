@@ -1,0 +1,49 @@
+#!/bin/bash
+#
+# 
+options=(
+  " Turn off"
+  " Reboot"
+  " Lock screen"
+  " Sleep"
+  " Update and turn off"
+  )
+
+menu_options=$(printf "%s\n" "${options[@]}")
+
+num_options=${#options[@]}
+
+selected=$(echo -e "$menu_options" | rofi -dmenu -p " " -l "$num_options" -theme ~/.scripts/powermenu.rofi -columns 3 -lines 3)
+
+index=-1
+for i in "${!options[@]}"; do
+    if [[ "${options[$i]}" == "$selected" ]]; then
+        index=$i
+        break
+    fi
+done
+
+
+if [[ $index -ne -1 ]]; then
+  case $index in
+    0)
+        shutdown +0 
+        ;;
+    1)
+        reboot
+        ;;
+    2)
+        hyprlock        
+        ;;
+    3)
+        systemctl sleep
+        ;;
+    4)
+        kitty sh -c "/home/camille/.scripts/update-and-shutdown.sh"
+        ;;
+    *)
+        notify-send "No valid option selected"
+        ;;
+  esac
+fi
+
