@@ -110,7 +110,7 @@ elif [[ $EMOJI == "true" ]]; then
                 echo "󰁹 "
                 ;;
             *)
-                echo "󰂑 "
+                echo "󰂏 "
                 ;;
         esac
     else
@@ -135,7 +135,7 @@ elif [[ $EMOJI == "true" ]]; then
                 echo "󰂅 "
                 ;;
             *)
-                echo "󰂑"
+                echo "󰂏"
                 ;;
         esac
     fi
