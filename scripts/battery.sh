@@ -114,7 +114,7 @@ elif [[ $BAR == "true" ]]; then
 elif [[ $GRADIENT == "true" ]]; then
     draw_stick "$CURRENT_CHARGE" 13
 elif [[ $CHARGE_ONLY == "true" ]]; then
-    echo "$CURRENT_CHARGE"
+    echo "$CURRENT_CHARGE%"
 elif [[ $STATE_ONLY == "true" ]]; then
     echo "$STATUS"
 elif [[ "$NUMERIC" == "true" ]]; then
