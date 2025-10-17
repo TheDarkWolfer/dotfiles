@@ -1,0 +1,446 @@
+[
+{   
+    "name": "top",
+    
+    "layer": "top",
+    "position": "top",
+
+    "height": 13,
+
+    "margin": 0,
+    "spacing": 10,
+    
+    "mode": "top",
+
+    
+
+    "reload_style_on_change": true,
+
+    "modules-left": [
+      "group/powermenu",
+      "group/expand-left",
+      "group/tray-display",
+	  ],
+
+    "modules-center": [
+      "niri/window",
+      "niri/workspaces",
+      "custom/clock",
+    ],
+    
+    "modules-right": [
+      "group/expand-right",
+      "group/hardware",
+    ],
+
+    "custom/powermenu":{
+        "format":" ",
+        "tooltip":false,
+    },
+
+    "group/powermenu":{
+        "orientation":"horizontal",
+        "drawer":{
+          "transition-duration":600,
+          "transition-to-right": true,
+          "click-to-reveal": true
+        },
+        "modules":["custom/powermenu","custom/sleep","custom/lock","custom/logout","custom/reboot","custom/poweroff"],
+    },
+
+    "custom/ollama-status":{
+    "interval": 1,
+    "return-type": "json",
+    "format-icons": {
+        "connected": "󰄄 ",
+        "disconnected": "󰄄 "
+    },
+    "exec": "exec ~/.config/scripts/ai.sh -s",
+    "format": "{icon}",
+    "on-click":"exec ~/.config/scripts/ai.sh -t"    
+    },
+
+    "custom/rotation-status":{
+    "interval": 1,
+    "return-type": "json",
+    "format-icons": {
+        "connected": " ",
+        "disconnected": " "
+    },
+    "exec": "exec ~/.config/scripts/rotation-toggle.sh -w",
+    "format": "{icon}",
+    "on-click":"exec ~/.config/scripts/rotation-toggle.sh"    
+    },
+
+    "custom/tray-display":{
+        "format":"󱃲 ",
+        "tooltip":false
+    },
+
+    "group/tray-display":{
+        "orientation":"horizontal",
+        "drawer":{
+          "transition-duration":600,
+          "transition-to-right": true,
+          "click-to-reveal": true
+        },
+        "modules":["custom/tray-display","custom/recording-status","tray","custom/ollama-status"],
+    },
+
+    "group/hardware":{
+      "orientation":"horizontal",
+      "drawer":{
+        "transition-duration":600,
+        "transition-to-left":true,
+        "click-to-reveal":true,
+      },
+      "modules":["battery","custom/battery","cpu","memory","temperature","disk"]
+    },
+    
+    "custom/expand-left":{
+        "format":"󰎇 ",
+        "tooltip":false,
+        //"on-click":"kitty --title 'Music' sh -c 'rmpc -c /home/camille/.config/rmpc/config.json'"
+    },
+
+    "custom/sleep":{
+      "format":" ",
+      "tooltip":false,
+      "on-click":"systemctl sleep"
+    },
+
+    "custom/logout":{
+        "format":"󰍃 ",
+        "tooltip":false,
+        "on-click":"niri msg action quit"
+    },
+
+    "custom/poweroff":{
+      "format":"󰐥 ",
+      "tooltip":false,
+      "on-click":"~/.config/scripts/poweroff.sh"
+    },
+    
+    "custom/reboot":{
+      "format":"󰑓 ",
+      "tooltip":false,
+      "on-click":"~/.config/scripts/poweroff.sh -r"
+    },
+
+    "custom/lock":{
+      "format":" ",
+      "tooltip":false,
+      "on-click":"~/.config/scripts/lock-management.sh",
+      "on-click-right":"~/.config/scripts/lock-management.sh -t",
+      "on-click-middle":"~/.config/scripts/lock-management.sh -s"
+    },
+
+    "group/expand-left":{
+        "orientation":"horizontal",
+        "drawer":{
+          "transition-duration":600,
+          "transition-to-right": true,
+          "click-to-reveal": true
+        },
+        "modules":["custom/expand-left","wireplumber","mpd"]
+    },
+
+    "custom/expand-right": {
+            "format": " ",
+            "tooltip": false
+    },
+
+    "group/expand-right": {
+            "orientation": "horizontal",
+            "drawer": {
+                "transition-duration": 600,
+                "transition-to-left": true,
+                "click-to-reveal": true
+            },
+            "modules": ["custom/expand-right","backlight","bluetooth","network","custom/wireguard-manager"]
+        },
+
+
+    "network": {
+        "format-wifi": " ",
+        "format-ethernet":" ",
+        "format-disconnected": " ",
+        "tooltip-format-disconnected": " ",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)  ",
+        "tooltip-format-ethernet": "{ifname} 🖧 ",
+        "on-click": "kitty --title 'Network' nmtui"
+    },
+    "bluetooth": {
+        "format-on": "󰂯 ",
+        "format-off": " ",
+        "format-disabled": "󰂲 ",
+        "format-connected-battery": "󰂱 ",
+        "format-alt": "{device_alias} 󰂯",
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\n{device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\n{device_address}\n{device_battery_percentage}%",
+        "on-click-right": "blueman-manager",
+        "on-click":"bluetoothctl connect C8:2B:6B:7A:5C:1A"
+    },
+    "custom/recording":{
+      "exec":"exec ~/.config/scripts/screen-record.sh -s",
+      "format":"{}",
+      "interval":1,
+    },
+
+    "custom/players": {
+      "interval":1,
+      "exec":"exec ~/.config/scripts/media-players.sh",
+      "on-click":"exec ~/.config/scripts/media-players.sh -t",
+      "on-click-right":"exec ~/.config/scripts/media-players.sh -o",
+    },
+
+    "custom/charge": {
+      "interval":900,
+      "format":"{}",
+      "tooltip":false,
+      "exec":"exec ~/.config/scripts/power-notification.sh",
+      "on-click":"~/.config/scripts/power-notification.sh -t"
+    },
+  
+    "custom/wireguard-manager": {
+    "interval": 1,
+    "return-type": "json",
+    "format-icons": {
+        "connected": "VPN  ",
+        "disconnected": "VPN  "
+    },
+    "on-click": "exec ~/.config/scripts/isVPN.sh -t",
+    "exec": "exec ~/.config/scripts/isVPN.sh -s",
+    "format": "{icon}"
+    },
+
+    "custom/recording-status":{
+      "interval":1,
+      "return-type":"json",
+      "format-icons":{
+        "on":"  ",
+        "off":"   ",
+      },
+      "format":"{icon}",
+      "exec":"exec ~/.config/scripts/screen-record.sh -s",
+      "on-click":"~/.config/scripts/screen-record.sh"
+    },
+
+    "custom/cava": {
+      "exec":"~/.config/scripts/waybar-vis.sh",
+      "format":"{}"
+    },
+
+    "backlight": {
+        "interval": 2,
+        "format": "󰖨 {percent}%",
+        "on-scroll-up": "brightnessctl set +10",
+        "on-scroll-down": "brightnessctl set 10-"
+    },
+
+    "custom/battery":{
+        "interval":1,
+        "format":"󱐋 {}",
+        "exec":"/home/camille/.config/scripts/battery.sh -c",
+        "tooltip":true,
+        //"tooltip-format":"{exec /home/camille/.config/scripts/battery.sh -r}",
+    },
+
+    "wireplumber": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟 ",
+        "on-click-right": "killall pavucontrol || pavucontrol &",
+        "format-icons": [" ", " ", " ", " ", " "]
+    },
+
+    "battery": {
+        "interval": 1,
+        "format": "{icon}  ",
+        "format-charging":"{icon}  ",
+        "format-icons": [" "," "," "," "," "],
+        //"format-icons":["󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"],
+        "tooltip": true,
+        "tooltip-format": "{timeTo}",
+        "markup":"pango",
+        "states":{
+          "warning":40,
+          "critical":20
+        },
+        "events":{
+          "on-discharging-warning":"notify-send -u normal 'Low battery'",
+          "on-discharging-critical":"notify-send -u critical 'Battery critical",
+         "on-charging-100":"notify-send -u normal 'Battery full'",
+        }
+    },
+
+    "disk": {
+        "intervel": 300,
+        "format": "󰋊 {percentage_used}%",
+        "tooltip-format": "{used} used out of {total} on \"{path}\" ({percentage_used}%)",
+        "on-click":"kitty sh -c 'ncdu /home/camille'",
+        "tooltip":false,
+    },
+
+    "memory": {
+        "interval": 1,
+        "format": "  {used}",
+        "tooltip-format": "{used}GiB used of {total}GiB ({percentage}%)",
+		    "on-click":"kitty sh -c 'btop'",
+        "tooltip":false,
+    },
+
+    "cpu": {
+        "interval": 1,
+        "format": "  {usage}%",
+		    "on-click":"kitty sh -c 'btop'",
+        "tooltip":false,
+    },
+
+    "temperature": {
+        "thermal-zone":0,
+        "format":"{icon}{temperatureC}°c",
+        "format-icons":[" "," "," "," "," "],
+        "tooltip":false,
+        "interval": 1,
+    },
+    
+    "group/datetime":{
+        "orientation": "horizontal",
+        "drawer": {
+          "transition-duration": 600,
+          "transition-to-right": true,
+          "click-to-reveal": false
+        },
+        "modules": ["clock","custom/datetime"]
+    },
+
+    "custom/datetime":{
+      "format":"{}",
+      "exec":"thedate.sh",
+      "tooltip":false,
+      "on-click":"thedate.sh | wl-copy",
+      "interval":3600,
+      "on-click-right":"echo \"$(date +'%H:%M') - $(thedate.sh)\" | wl-copy"
+    },
+
+    "clock":{
+      "format":"{:%H:%M}",
+      "tooltip":false,
+      "on-click":"date +'%H:%M' | wl-copy",
+      "on-click-right":"echo \"$(date +'%H:%M') - $(thedate.sh)\" | wl-copy"
+    },
+
+    "custom/clock":{
+      "format":"{}",
+      "tooltip":false,
+      "interval":1,
+      "exec":"~/.config/scripts/hideable-date.sh",
+      "on-click":"~/.config/scripts/hideable-date.sh -t",
+    },
+
+    "custom/right-separator": {
+      "format":"]",
+    },
+
+    "custom/left-separator": {
+      "format":"[",
+    },
+
+    "custom/middle-separator": {
+      "format":"|",
+    },
+
+    "custom/system-icon": {
+      "format":" ",
+      "on-click":"~/.config/scripts/wallpaper.sh -m",
+    },
+
+    "custom/icon": {
+      "format":" ",
+      "on-click":"exec ~/.config/scripts/rotation-toggle.sh"
+    },
+
+    "mpd": {
+    "on-click":"rmpc togglepause",
+    "on-click-right":"rmpc togglerepeat",
+    "on-scroll-up":"rmpc next",
+    "on-scroll-down":"rmpc prev",
+    "title-len":21,
+    "artist-len":21,
+    "format": "{stateIcon} {consumeIcon} {randomIcon} {repeatIcon} {singleIcon} {title} - {artist} ({elapsedTime:%M:%S}/{totalTime:%M:%S})  ",
+    "format-disconnected": "Disconnected  ",
+    "format-stopped": "{consumeIcon} {randomIcon} {repeatIcon} {singleIcon} Stopped  ",
+    "interval": 1,
+    "consume-icons": {
+        "on": " " 
+    },
+    "random-icons": {
+        "off": "<span color=\"#f53c3c\"></span> ", 
+        "on": " "
+    },
+    "repeat-icons": {
+        "on": " "
+    },
+    "single-icons": {
+        "on": " 1"
+    },
+    "state-icons": {
+        "paused": "",
+        "playing": ""
+    },
+    "tooltip":false,
+    "tooltip-format": "MPD (connected)",
+    "tooltip-format-disconnected": "MPD (disconnected)"
+},
+    "niri/window": {
+        "tooltip":false,
+        "icon": false,
+        "icon-size": 22,
+        "on-click":"niri msg action toggle-overview",
+        "format":"{} ",
+        "rewrite": { 
+            ".*LibreWolf.*": " 𝓘𝓷𝓽𝓮𝓻𝓷𝓮𝓽",
+			      ".*Kitty.*": " 𝓣𝓮𝓻𝓶𝓲𝓷𝓪𝓵",
+            ".*Kleopatra.*": " 𝓚𝓮𝔂𝓼",
+            ".*Neovide.*":" 𝓘𝓓𝓔",
+            ".*btop.*":" 𝓢𝔂𝓼𝓽𝓮𝓶 𝓜𝓸𝓷𝓲𝓽𝓸𝓻",
+            ".*qFlipper.*":" 𝓕𝓵𝓲𝓹𝓹𝓮𝓻",
+            ".*Monero.*":" 𝓦𝓪𝓵𝓵𝓮𝓽",
+            ".*Tor Browser.*":" 𝓣𝓸𝓻",
+            ".*obsidian.*":" 𝓞𝓫𝓼𝓲𝓭𝓲𝓪𝓷",
+            ".*qutebrowser.*":"𝓠𝓾𝓽𝓮𝓫𝓻𝓸𝔀𝓼𝓮𝓻",
+            ".*Music.*":" 𝑀𝓊𝓈𝒾𝒸",
+            ".*Lutris.*":"𝒢𝒶𝓂𝑒𝓈",
+            ".*Outlook.*":"𝓞𝓾𝓽𝓵𝓸𝓸𝓴",
+            ".*LinkedIn.*":"𝓛𝓲𝓷𝓴𝓮𝓭𝓘𝓷",
+            ".*Teams.*":"𝓣𝓮𝓪𝓶𝓼",
+            ".*Impress.*":"𝓟𝓻𝓮𝓼𝓮𝓷𝓽𝓪𝓽𝓲𝓸𝓷",
+            ".*Presenting:.*":"𝓟𝓻𝓮𝓼𝓮𝓷𝓽𝓪𝓽𝓲𝓸𝓷",
+            ".*Writer.*":"𝓣𝓮𝔁𝓽 𝓭𝓸𝓬𝓾𝓶𝓮𝓷𝓽",
+
+        },
+    },
+    "custom/status-icon": {
+      "format": "{}",
+      "exec": "/home/camille/.config/scripts/data.sh",
+      "interval": 1
+    },
+
+    "niri/workspaces": {
+        "show-special": false,
+        //"persistent-workspaces": {
+        //    "*":[1,2,3,4,5,6,7,8,9,10]
+        //},
+        "format": "{icon}",
+        "format-icons": {
+            "active": " ",
+            "empty": " ",
+            "default": " ",
+            "urgent": " ",
+            "special": " "
+        }
+
+    }
+}]
