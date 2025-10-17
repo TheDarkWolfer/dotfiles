@@ -1,23 +1,28 @@
 # Dotfile repository - Camille
 
-### What is it ?
-This is a repository that holds all the files necessary to recreate the config I use daily on EndeavorOS. On top of the scripts that I made and use daily, it contains dotfiles for :
-- BTOP
+## What is it ?
+This is a repository that holds all the files necessary to recreate the config I use daily on Arch. On top of the scripts that I made and use daily, it contains dotfiles for :
 - Dunst
 - Niri
 - Kitty
 - Waybar
 
-### What to do ?
+## What to do ?
 You can clone this repository with git :
-```shell
+```bash
 git clone https://github.com/TheDarkWolfer/dotfiles ~/.config/
 ```
 This will copy the whole structure into your local config folder. ***IT WILL OVERWRITE ANY EXISTING CONFIGURATION, KEEP THAT IN MIND***
 
+Alternatively (the recommended way of doing it), you can use the handy installer script ;
+```bash
+wget https://raw.githubusercontent.com/TheDarkWolfer/dotfiles/refs/heads/main/installer.sh -o installer.sh
+sha256sum installer.sh # Make sure this is <INSERT CHECKSUM>
+./installer.sh -i
+```
 <sup>Please note that those configs are known to work on Arch and Arch-based distros, so YMMV</sup>
 
-### What are the scripts ?
+## What are the scripts ?
 - battery.sh
     - Displays the current charge of your device in different formats.
     - args :    -s / --state    : for whether it is charging or discharging
