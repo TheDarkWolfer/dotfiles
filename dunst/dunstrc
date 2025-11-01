@@ -9,6 +9,7 @@ scale = 0
 notification_limit = 20
 
 progress_bar = true
+highlight = "#e0def4"
 progress_bar_height = 10
 progress_bar_frame_width = 1
 progress_bar_min_width = 150
@@ -84,6 +85,7 @@ timeout = 10
 background = "#6e6a86cc"
 foreground = "#ebbcba"
 frame_color = "#c4a7e7"
+
 timeout = 10
 
 override_pause_level = 30

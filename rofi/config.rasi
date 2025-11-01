@@ -2,9 +2,9 @@
 
 
 configuration {
-	font:							"FiraCode Nerd Font 15";    
+	font:							"Fira Code Nerd Font";    
   show-icons:                     true;
-	icon-theme: 					"Papirus";
+	icon-theme: 					"Candy";
     display-drun: 					"";
     drun-display-format:            "{name}";
     disable-history:                false;
@@ -24,10 +24,12 @@ window {
 	  border:							0px;
     border-radius:                  0px;
 	  width:							50%;
-    location:                       center;
+    height: 50%;
+    location:                       south;
     x-offset:                       0;
     y-offset:                       0;
     opacity:                        50%;
+    border-radius:15px;
 }
 
 prompt {
@@ -44,7 +46,7 @@ entry {
     placeholder-color:              @foregorund;
     expand:                         true;
     horizontal-align:               0;
-    placeholder:                    "Search...";
+    placeholder:                    "";
     padding:                        12px 10px 10px 10px;
     margin:                         0px 250px 0px 0px;
     border-radius:                  0px 50px 50px 0px;

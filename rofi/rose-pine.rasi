@@ -12,7 +12,7 @@
 	red: #eb6f92;
 	yel: #f6c177;
 
-	font: "Cartograph CF 12";
+	font: "Fira Code Nerd Font 15";
 
 	foreground: @fgd;
 	background: @bg;

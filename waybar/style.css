@@ -48,7 +48,6 @@ window#waybar {
 #cpu,
 #wireplumber,
 #disk,
-#custom-cava,
 #window,
 #battery,
 #wireplumber,
@@ -69,12 +68,32 @@ window#waybar {
   border-radius:42px;
 }
 
+@keyframes cava-fade {
+  from {
+    color:@pine;
+  } to {
+    color:@iris;
+  }
+}
+
+#custom-cava {
+  background-color: @surface;
+  animation: cava-fade 42s ease-in-out infinite alternate;
+  padding:5px 7px;
+  margin: 1px 1px 1px 1px;
+  border-radius:42px;
+}
+
+#custom-recording-status.off {
+  color:@foam;
+}
+
 #custom-wireguard-manager.connected,
 #custom-ollama-status.connected,
-#custom-rotation-status.connected,
-#custom-recording-status.off
+#custom-rotation-status.connected
 {
   color:@foam;
+  animation: fade 0.5s ease-in-out infinite alternate;
 }
 
 #custom-wireguard-manager.disconnected, 
@@ -95,23 +114,38 @@ window#waybar {
   color:@muted;
 }
 
-#workspaces {
-  background-color:@base;
+@keyframes workspace-pulse {
+  from {
+    color:@subtle;
+  } to {
+    color:@rose;
+  }
 }
 
-#workspaces button{
+#workspaces button:hover {
+
+  background-color:@base;
+  
+  animation-name: workspace-pulse;
+  animation-duration: 0.7s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
   color:@subtle;
   padding:5 7px;
   margin: 1px 1 1px 1;
   transition:color 200ms ease-in-out;
-}
-
-#workspaces button:hover {
-  color:@rose;
   background:rgba(0,0,0,0);
   border:rgba(0,0,0,0);
   padding:5 7px;
   margin: 1px 1 1px 1;
+}
+
+#workspaces button.active:hover {
+  animation-name:iris-pulse;
+  animation-duration:0.7s;
+  animation-timing-function:ease-in-out;
+  animation-direction:alternate;
 }
 
 #workspaces button.selected,
@@ -121,6 +155,18 @@ window#waybar {
 
 #workspaces button.urgent{
   color:@gold;
+}
+
+#workspaces button {
+  color:@subtle;
+}
+
+@keyframes mpd-fade {
+  from {
+    color:@iris;
+  } to {
+    color:@subtle;
+  }
 }
 
 #mpd {
@@ -142,11 +188,12 @@ window#waybar {
   color:@foam;
 }
 
+
 #mpd.playing {
   color:@iris;
+  animation: mpd-fade 0.5s ease-in-out infinite alternate;
 }
 
-#custom-expand-left,
 #custom-expand-right,
 #custom-tray-display {
   padding:1 3px ;
@@ -156,8 +203,16 @@ window#waybar {
 #custom-expand-left:hover, 
 #custom-expand-right:hover {
   color:@rose;
+  animation: fade 0.5s ease-in-out infinite alternate;
 }
 
+@keyframes fade {
+  from {
+    opacity:1;
+  } to {
+    opacity:0.5;
+  }
+}
 
 #custom-powermenu { 
   color:@text;
@@ -169,6 +224,7 @@ window#waybar {
 
 #custom-powermenu:hover {
   color:@iris;
+  animation: fade 0.5s ease-in-out infinite alternate;
 }
 
 #custom-lock:hover {
@@ -237,6 +293,24 @@ window#waybar {
   margin-left:0px;
 }
 
+@keyframes iris-pulse {
+    from {
+	color:@subtle;
+    }
+
+    to {
+	color: @iris;
+    }
+}
+
+#window:hover {
+    animation-name: iris-pulse;
+    animation-duration: 0.7s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
 #clock,
 #custom-clock,
 #datetime {
@@ -256,18 +330,72 @@ window#waybar {
   color:@foam;
 }
 
-#custom-reboot:hover,
-#battery.charging:hover {
+#custom-reboot:hover
+{
   color:@gold;
 }
 
-#custom-poweroff:hover,
-#battery.discharging:hover{
+#custom-poweroff:hover
+{
   color:@love;
 }
 
-#battery {
-  transition:width 2s;
+@keyframes charge-pulse {
+  from {
+    color:@subtle;
+  }
+  to {
+    color:@gold;
+  }
+}
+
+@keyframes discharge-pulse {
+  from {
+    color:@subtle;
+  }
+  to {
+    color:@love;
+  }
+}
+
+@keyframes foam-pulse {
+  from {
+    color:@subtle;
+  } to {
+    color:@foam;
+  }
+}
+
+#battery.charging {
+  animation-name: foam-pulse;
+  animation-duration: 0.7s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#battery.discharging {
+  animation-name: iris-pulse;
+  animation-duration: 0.7s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#battery.warning {
+  animation-name: charge-pulse;
+  animation-duration: 0.7s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#battery.critical {
+  animation-name: discharge-pulse;
+  animation-duration: 0.7s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 #custom-battery:hover,
@@ -289,6 +417,7 @@ window#waybar {
 
 #custom-tray-display:hover {
   color:@foam;
+  animation: fade 0.5s ease-in-out infinite alternate;
 }
 
 #window:hover,
@@ -296,7 +425,11 @@ window#waybar {
 #bluetooth:hover,
 #custom-clock:hover,
 #clock:hover {
-  color:@foam;
+  animation:foam-pulse;
+  animation-duration:0.7s;
+  animation-timing-function:ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction:alternate;
 }
 
 #network:hover,
@@ -306,4 +439,59 @@ window#waybar {
 
 #temperature.critical {
   color:@love;
+}
+
+#custom-heart {
+  border-radius: 16px 16px 16px 16px;
+  padding:1px 13px;
+  background-color:@surface;
+}
+
+@keyframes heart-good {
+  from {
+    color:@pine;
+  } to {
+    color:@foam;
+  }
+}
+
+@keyframes heart-okay {
+  from {
+    color:@foam;
+  } to {
+    color:@iris;
+  }
+}
+
+@keyframes heart-bad {
+  from {
+    color:@gold;
+  } to {
+    color:@rose;
+  }
+}
+
+@keyframes heart-critical {
+  from {
+    color:@rose;
+  } to {
+    color:@love;
+  }
+}
+
+#custom-heart.good {
+  animation: heart-good 0.7s ease-in-out infinite alternate;
+}
+
+#custom-heart.okay {
+  animation: heart-okay 0.5s ease-in-out infinite alternate;
+}
+
+#custom-heart.bad {
+  animation: heart-bad 0.3s ease-in-out infinite alternate;
+}
+
+#custom-heart.critical {
+  animation: heart-critical 0.2s ease-in-out infinite alternate;
+
 }

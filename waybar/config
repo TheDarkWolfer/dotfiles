@@ -24,7 +24,9 @@
 
     "modules-center": [
       "niri/window",
-      "niri/workspaces",
+      "custom/heart",
+      //"niri/workspaces",
+      //"custom/cava",
       "custom/clock",
     ],
     
@@ -46,6 +48,11 @@
           "click-to-reveal": true
         },
         "modules":["custom/powermenu","custom/sleep","custom/lock","custom/logout","custom/reboot","custom/poweroff"],
+    },
+
+    "custom/cava": {
+      "exec":"~/.config/scripts/waybar-vis.sh",
+      "format":"{}"
     },
 
     "custom/ollama-status":{
@@ -228,10 +235,6 @@
       "on-click":"~/.config/scripts/screen-record.sh"
     },
 
-    "custom/cava": {
-      "exec":"~/.config/scripts/waybar-vis.sh",
-      "format":"{}"
-    },
 
     "backlight": {
         "interval": 2,
@@ -419,6 +422,12 @@
             ".*Impress.*":"𝓟𝓻𝓮𝓼𝓮𝓷𝓽𝓪𝓽𝓲𝓸𝓷",
             ".*Presenting:.*":"𝓟𝓻𝓮𝓼𝓮𝓷𝓽𝓪𝓽𝓲𝓸𝓷",
             ".*Writer.*":"𝓣𝓮𝔁𝓽 𝓭𝓸𝓬𝓾𝓶𝓮𝓷𝓽",
+            ".*Calc.*":"𝓣𝓪𝓫𝓵𝓮",
+            ".*Signal.*":" 𝓒𝓸𝓶𝓶𝓼",
+            ".*Compass.*":" 𝓜𝓸𝓷𝓰𝓸𝓓𝓑",
+            ".*Codium.*":" 𝓓𝓮𝓿𝓮𝓵𝓸𝓹𝓶𝓮𝓷𝓽  ",
+            ".*Virtual Machine Manager.*":" 𝓥𝓲𝓻𝓽𝓾𝓪𝓵 𝓜𝓪𝓬𝓱𝓲𝓷𝓮𝓼  ",
+            ".*Chromium.*":" 𝓒𝓱𝓻𝓸𝓶𝓲𝓾𝓶",
 
         },
     },
@@ -426,6 +435,20 @@
       "format": "{}",
       "exec": "/home/camille/.config/scripts/data.sh",
       "interval": 1
+    },
+
+    "custom/heart":{
+      "exec":"/home/camille/.config/scripts/device-heart.sh",
+      "on-click":"/home/camille/.config/scripts/hexecute",
+      "interval": 1,
+      "return-type": "json",
+      "format-icons": {
+        "good": "󰋑",
+        "okay": "󰋑",
+        "bad":"󰋑",
+        "critical":"󰋔"
+      },
+      "format": "{icon}"
     },
 
     "niri/workspaces": {
@@ -443,4 +466,5 @@
         }
 
     }
-}]
+},
+]

@@ -1,0 +1,136 @@
+#![enable(implicit_some)]
+#![enable(unwrap_newtypes)]
+#![enable(unwrap_variant_newtypes)]
+(
+    default_album_art_path: "/home/camille/PFP.png",
+    show_song_table_header: true,
+    draw_borders: true,
+    browser_column_widths: [20, 38, 42],
+    background_color: None,
+    text_color: "#e0def4",
+    header_background_color: None,
+    modal_background_color: None,
+    tab_bar: (
+        enabled: true,
+        active_style: (fg: "black", bg: "#6e6a86", modifiers: "Bold"),
+        inactive_style: (),
+    ),
+    highlighted_item_style: (fg: "#ebbcba", modifiers: "Bold"),
+    current_item_style: (fg: "black", bg: "#6e6a86", modifiers: "Bold"),
+    borders_style: (fg: "#6e6a86"),
+    highlight_border_style: (fg: "#eb6f92"),
+    symbols: (song: "*", dir: " ", marker: " ", ellipsis: "..."),
+    progress_bar: (
+        symbols: ["█", "█", "█"],
+        track_style: (fg: "#141b1e"),
+        elapsed_style: (fg: "#c4a7e7"),
+        thumb_style: (fg:"#c4a7e7"),
+
+    ),
+    scrollbar: (
+        symbols: ["┆ ", "█ ", " ", " "],
+        track_style: (),
+        ends_style: (),
+        thumb_style: (fg: "#6e6a86"),
+    ),
+    song_table_format: [
+        (
+            prop: (kind: Property(Artist),
+                default: (kind: Text("Unknown"))
+            ),
+            width: "20%",
+        ),
+        (
+            prop: (kind: Property(Title),
+                default: (kind: Text("Unknown"))
+            ),
+            width: "35%",
+        ),
+        (
+            prop: (kind: Property(Duration),
+                default: (kind: Text("-"))
+            ),
+            width: "15%",
+            alignment: Right,
+        ),
+    ],
+    layout: Split(
+        direction: Vertical,
+        panes: [
+            (
+                pane: Pane(Header),
+                size: "2",
+            ),
+            (
+                pane: Pane(Tabs),
+                size: "3",
+            ),
+            (
+                pane: Pane(TabContent),
+                size: "100%",
+            ),
+            (
+                pane: Pane(ProgressBar),
+                size: "1",
+            ),
+        ],
+    ),
+    header: (
+        rows: [
+            (
+                left: [
+
+                    (kind: Property(Status(StateV2(playing_label: "  ", paused_label: "  ", stopped_label: "  "))), style: (fg: "#c4a7e7", modifiers: "Bold")),
+                ],
+                center: [
+                    (kind: Property(Song(Title)), style: (modifiers: "Bold"),
+                        default: (kind: Text(" "), style: (modifiers: "Bold"))
+                    )
+                ],
+                right: [
+                    (kind: Property(Widget(Volume)), style: (fg:"#c4a7e7",modifiers:"Bold")),
+                ]
+            ),
+            (
+                left: [
+                    (kind: Property(Status(Elapsed)),style:(fg:"#eb6f92",modifiers:"Bold")),
+                    (kind: Text(" / ")),
+                    (kind: Property(Status(Duration)),style:(fg:"#eb6f92",modifiers:"Bold")),
+                    (kind: Text(" (")),
+                    (kind: Property(Status(Bitrate)),style:(fg:"#ebbcba",modifiers:"Bold")),
+                    (kind: Text(" kbps)"))
+                ],
+                center: [
+                    (kind: Property(Song(Artist)), style: (fg: "#31748f", modifiers: "Bold"),
+                        default: (kind: Text("Unknown"), style: (fg: "#9ccfd8", modifiers: "Bold"))
+                    )
+                ],
+                right: [
+                    (
+                        kind: Property(Widget(States(
+                            active_style: (fg: "white", modifiers: "Bold"),
+                            separator_style: (fg: "white")))
+                        ),
+                        style: (fg: "dark_gray")
+                    ),
+                ]
+            ),
+        ],
+    ),
+    browser_song_format: [
+        (
+            kind: Group([
+                (kind: Property(Track)),
+                (kind: Text(" ")),
+            ])
+        ),
+        (
+            kind: Group([
+                (kind: Property(Artist)),
+                (kind: Text(" - ")),
+                (kind: Property(Title)),
+            ]),
+            default: (kind: Property(Filename))
+        ),
+    ],
+)
