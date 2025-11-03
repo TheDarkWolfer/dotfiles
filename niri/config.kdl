@@ -136,6 +136,12 @@ output "DP-1" {
   position x=1920 y=-1080
 }
 
+output "DSI-1" {
+  scale 2 
+  position x=0 y=0
+  transform "270"
+}
+
 // Overview background ; using swaybg:
 layer-rule {
     match namespace="swww-daemon"
@@ -571,8 +577,8 @@ binds {
 
     XF86WakeUp           hotkey-overlay-title=null allow-when-locked=true { spawn "hyprlock" "-c" "~/.config/ni"; }
 
-    XF86MonBrightnessDown hotkey-overlay-title=null allow-when-locked=true {spawn "brightnessctl" "s" "10%-" "--device=*"; }
-    XF86MonBrightnessUp hotkey-overlay-title=null allow-when-locked=true {spawn "brightnessctl" "s" "10%+" "--device=*"; }
+    XF86MonBrightnessDown hotkey-overlay-title=null allow-when-locked=true {spawn "brightnessctl" "s" "1%-" "--device=*"; }
+    XF86MonBrightnessUp hotkey-overlay-title=null allow-when-locked=true {spawn "brightnessctl" "s" "1%+" "--device=*"; }
 
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
