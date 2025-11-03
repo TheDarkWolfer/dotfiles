@@ -9,18 +9,18 @@ case "$1" in
   sleep .5
   touch "$CAM_FLAG" 
   pidof hyprlock && exit -1
-  env DISPLAY=:1 hyprlock -c ~/.config/scripts/hyprlock.conf && ( lock-trap.sh )
+  env DISPLAY=:1 hyprlock -c ~/.config/scripts/hyprlock.conf && ( lock-trap.sh ; ~/.config/scripts/did.sh "Unlocked  device" )
   ;;
   -s|--shutdown)
   notify-send "i" "Setting up lock shutdown trap..." -u low
   sleep .5
   touch "$OFF_FLAG" 
   pidof hyprlock && exit -1
-  env DISPLAY=:1 hyprlock -c ~/.config/scripts/hyprlock.conf && ( lock-trap.sh )
+  env DISPLAY=:1 hyprlock -c ~/.config/scripts/hyprlock.conf && ( lock-trap.sh ; ~/.config/scripts/did.sh "Unlocked  device" )
   ;; *)
     [[ -f "$FLAG" ]] && rm "$FLAG"
     pidof hyprlock && exit -1
-    hyprlock -c ~/.config/scripts/hyprlock.conf
+    hyprlock -c ~/.config/scripts/hyprlock.conf && ~/.config/scripts/did.sh "Unlocked  device"
   ;;
 esac
 

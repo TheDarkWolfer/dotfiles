@@ -392,7 +392,7 @@ spawn-sh-at-startup "udiskie -t"
 
 spawn-at-startup "nm-applet"
 
-spawn-sh-at-startup "chameleos"
+spawn-at-startup "chameleos"
 spawn-sh-at-startup "chamel stroke-color '#eb6f92'"
 
 spawn-at-startup "dunst"
@@ -541,7 +541,7 @@ binds {
     Mod+Shift+O hotkey-overlay-title="Obsidian" { spawn "obsidian"; }
     Mod+Space hotkey-overlay-title=null {spawn "~/.config/scripts/hideable-date.sh" "-tt"; }   
     Mod+Alt+Space hotkey-overlay-title="Toggle time widget" {spawn "~/.config/scripts/hideable-date.sh" "-t"; }
-    //Mod+Shift+T hotkey-overlay-title="Open E-Mails" {spawn "thunderbird";}
+    Mod+Shift+T hotkey-overlay-title="Open E-Mails" {spawn "thunderbird";}
 
     Mod+H hotkey-overlay-title="Hexecute" {spawn "~/.config/scripts/hexecute";}
 
@@ -551,10 +551,6 @@ binds {
     Mod+Alt+L hotkey-overlay-title=null {spawn "/home/camille/.config/scripts/lock-management.sh" "-t";}
     Mod+Ctrl+L hotkey-overlay-title=null {spawn "/home/camille/.config/scripts/lock-management.sh" "-s";}
     Mod+Shift+L allow-when-locked=true hotkey-overlay-title=null {spawn "bash" "-c" "~/.config/scripts/lock-trap.sh -d" ;}
-
-    //F12 hotkey-overlay-title="Toggle VPN" { spawn "bash" "-c" "~/.config/waybar/wireguard-manager/wireguard-manager.sh -t"; }
-
-    Mod+F12 hotkey-overlay-title=null { spawn "bash" "-c" "~/.config/scripts/wireguard-switcher.sh"; }
 
     Mod+U hotkey-overlay-title="USBGuard manager"{ spawn "kitty" "--title" "USB Menu" "sh" "-c" "~/.config/scripts/usb-menu.sh"; }
 
@@ -774,8 +770,8 @@ binds {
     Mod+Ctrl+Space hotkey-overlay-title=null       { switch-layout "next"; }
     Mod+Shift+Space hotkey-overlay-title=null { switch-layout "prev"; }
 
-    //Print { screenshot show-pointer=false; }
-    Print hotkey-overlay-title="Take a screenshot" {spawn "~/.config/scripts/screen-record.sh" "-g";}
+    Print { screenshot show-pointer=false; }
+    //Print hotkey-overlay-title="Take a screenshot" {spawn "~/.config/scripts/screen-record.sh" "-g";}
 
     Mod+twosuperior hotkey-overlay-title="Screenshot area" { screenshot show-pointer=false;}
     Mod+Shift+N hotkey-overlay-title="Take a screenshot of an area and keep it up for viewing"{ spawn "bash" "-c" "~/.config/scripts/screen-snippet.sh" ;}
