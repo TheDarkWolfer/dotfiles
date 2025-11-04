@@ -9,7 +9,6 @@ wf-recorder_check() {
 	fi
 }
 
-wf-recorder_check
 
 IMG="${HOME}/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%m-%s).png"
 VID="${HOME}/Videos/Recordings/$(date +%Y-%m-%d_%H-%m-%s).mp4"
@@ -32,12 +31,12 @@ case "$1" in
     wl-copy --type image/png < "$IMG"
 		exit 0
 	;;
--e|--eye)
-  notify-send "Recording selection" "$VID"
-  echo "$VID" > /tmp/recording.txt
-  wf-recorder  -g "$(slurp)" -f "$VID" &>/dev/null
-  exit 0
-  ;;
+#-e|--eye)
+#  notify-send "Recording selection" "$VID"
+#  echo "$VID" > /tmp/recording.txt
+#  wf-recorder  -g "$(slurp)" -f "$VID" &>/dev/null
+#  exit 0
+#  ;;
 esac
 
 SELECTION=$(echo -e "screenshot selection\nscreenshot HDMI-A-1\nscreenshot eDP-1\nrecord selection\nrecord eDP-1\nrecord HDMI-A-1" | rofi -dmenu -p "󰄀 " -w 25 -l 6)
@@ -46,7 +45,7 @@ SELECTION=$(echo -e "screenshot selection\nscreenshot HDMI-A-1\nscreenshot eDP-1
 AUDIO_SOURCE="$(pactl list sources short | grep RUNNING | awk '{print $2}' | head -n 1)"
 echo "AUDIO:$AUDIO_SOURCE"
 
-
+wf-recorder_check
 
 case "$SELECTION" in
 	"screenshot selection")

@@ -398,8 +398,8 @@ spawn-sh-at-startup "udiskie -t"
 
 spawn-at-startup "nm-applet"
 
-spawn-at-startup "chameleos"
-spawn-sh-at-startup "chamel stroke-color '#eb6f92'"
+spawn-at-startup "/home/camille/.cargo/bin/chameleos"
+spawn-sh-at-startup "/home/camille/.cargo/bin/chamel stroke-color '#eb6f92'"
 
 spawn-at-startup "dunst"
 
@@ -562,6 +562,8 @@ binds {
 
     Mod+Shift+W hotkey-overlay-title="Change wallpaper" { spawn "bash" "-c" "~/.config/scripts/wallpaper.sh -m"; }
     Mod+G hotkey-overlay-title="Clipboard history" { spawn "bash" "-c" "~/.config/scripts/clipboard-history.sh"; }
+
+    Mod+B hotkey-overlay-title="Calculator" { spawn "~/.config/scripts/calculator.sh" ; }
 
 //~/.config/scripts/wireguard-switcher.sh
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.

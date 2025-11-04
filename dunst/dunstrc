@@ -3,8 +3,8 @@ monitor = 0
 follow = none
 width = 150
 height = (0, 300)
-origin = top-right
-offset = (10, 50)
+origin = top-center
+offset = (0, 42)
 scale = 0
 notification_limit = 20
 
