@@ -153,7 +153,14 @@
     },
 
     "custom/expand-right": {
-            "format": " ",
+            "format": "{icon}",
+            "exec":"/home/camille/.config/scripts/caps-lock-status.sh",
+            "interval":1,
+            "return-type":"json",
+            "format-icons":{
+              "on":" ",
+              "off":" "
+            },
             "tooltip": false
     },
 
@@ -227,8 +234,8 @@
       "interval":1,
       "return-type":"json",
       "format-icons":{
-        "on":"  ",
-        "off":"   ",
+        "on":" ",
+        "off":" ",
       },
       "format":"{icon}",
       "exec":"exec ~/.config/scripts/screen-record.sh -s",

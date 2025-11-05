@@ -393,6 +393,7 @@ environment {
 //spawn-at-startup "waybar"
 
 spawn-at-startup "~/.config/scripts/start-mpd.sh"
+//spawn-at-startup "~/.config/scripts/now-playing.sh"
 
 spawn-sh-at-startup "udiskie -t"
 
@@ -576,6 +577,7 @@ binds {
     XF86AudioLowerVolume hotkey-overlay-title=null allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
     XF86AudioMute        hotkey-overlay-title=null allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
     XF86AudioMicMute     hotkey-overlay-title=null allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+    XF86AudioPause       hotkey-overlay-title=null allow-when-locked=true { spawn "~/.config/scripts/media-players.sh" "-t";} 
 
     XF86WakeUp           hotkey-overlay-title=null allow-when-locked=true { spawn "hyprlock" "-c" "~/.config/ni"; }
 

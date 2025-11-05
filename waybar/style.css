@@ -169,6 +169,10 @@ window#waybar {
   }
 }
 
+#mpd:hover {
+  animation: mpd-fade 0.5s ease-in-out infinite alternate;
+}
+
 #mpd {
   padding: 7px 13px;
   color:@muted;
@@ -200,10 +204,19 @@ window#waybar {
   color:@text;
 }
 
-#custom-expand-left:hover, 
+
+#custom-expand-right {
+  color:@iris;
+}
+
+#custom-expand-right.on:hover, 
 #custom-expand-right:hover {
   color:@rose;
   animation: fade 0.5s ease-in-out infinite alternate;
+}
+
+#custom-expand-right.off {
+  color:@text;
 }
 
 @keyframes fade {
