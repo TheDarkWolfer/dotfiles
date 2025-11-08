@@ -39,13 +39,13 @@ case "$1" in
 #  ;;
 esac
 
+wf-recorder_check
+
 SELECTION=$(echo -e "screenshot selection\nscreenshot HDMI-A-1\nscreenshot eDP-1\nrecord selection\nrecord eDP-1\nrecord HDMI-A-1" | rofi -dmenu -p "󰄀 " -w 25 -l 6)
 
 #AUDIO_SOURCE="$(pactl list short sources | grep bluez | awk '{print $2}' | tail -n 1)"
 AUDIO_SOURCE="$(pactl list sources short | grep RUNNING | awk '{print $2}' | head -n 1)"
 echo "AUDIO:$AUDIO_SOURCE"
-
-wf-recorder_check
 
 case "$SELECTION" in
 	"screenshot selection")
@@ -71,7 +71,7 @@ case "$SELECTION" in
 	"record eDP-1")
     notify-send "Recording eDP-1" "$VID"
 		echo "$VID" > /tmp/recording.txt
-		wf-recorder  -o eDP-1 -f "$VID" -a "$AUDIO_SOURCE" &>/dev/null
+		wf-recorder  -o eDP-1 -f "$VID" &>/dev/null
     ;;
 
   "record HDMI-A-1")

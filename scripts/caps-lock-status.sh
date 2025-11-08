@@ -6,7 +6,7 @@ ON='{"text":"On","class":"on","alt":"on"}'
 
 #You can check via /sys/class/leds/input*/capslock/brightness:
 
-if [[ "$(cat /sys/class/leds/input27::capslock/brightness)" == "1" ]]; then
+if [[ "$(cat /sys/class/leds/input*::capslock/brightness | head -n 1)" == "1" ]]; then
   echo "$ON"
 else
   echo "$OFF"

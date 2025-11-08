@@ -393,7 +393,6 @@ environment {
 //spawn-at-startup "waybar"
 
 spawn-at-startup "~/.config/scripts/start-mpd.sh"
-//spawn-at-startup "~/.config/scripts/now-playing.sh"
 
 spawn-sh-at-startup "udiskie -t"
 

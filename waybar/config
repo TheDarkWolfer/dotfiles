@@ -67,18 +67,6 @@
     "on-click":"exec ~/.config/scripts/ai.sh -t"    
     },
 
-    "custom/rotation-status":{
-    "interval": 1,
-    "return-type": "json",
-    "format-icons": {
-        "connected": " ",
-        "disconnected": " "
-    },
-    "exec": "exec ~/.config/scripts/rotation-toggle.sh -w",
-    "format": "{icon}",
-    "on-click":"exec ~/.config/scripts/rotation-toggle.sh"    
-    },
-
     "custom/tray-display":{
         "format":"󱃲 ",
         "tooltip":false
@@ -209,14 +197,6 @@
       "on-click":"exec ~/.config/scripts/media-players.sh -t",
       "on-click-right":"exec ~/.config/scripts/media-players.sh -o",
     },
-
-    "custom/charge": {
-      "interval":900,
-      "format":"{}",
-      "tooltip":false,
-      "exec":"exec ~/.config/scripts/power-notification.sh",
-      "on-click":"~/.config/scripts/power-notification.sh -t"
-    },
   
     "custom/wireguard-manager": {
     "interval": 1,
@@ -326,22 +306,6 @@
         "modules": ["clock","custom/datetime"]
     },
 
-    "custom/datetime":{
-      "format":"{}",
-      "exec":"thedate.sh",
-      "tooltip":false,
-      "on-click":"thedate.sh | wl-copy",
-      "interval":3600,
-      "on-click-right":"echo \"$(date +'%H:%M') - $(thedate.sh)\" | wl-copy"
-    },
-
-    "clock":{
-      "format":"{:%H:%M}",
-      "tooltip":false,
-      "on-click":"date +'%H:%M' | wl-copy",
-      "on-click-right":"echo \"$(date +'%H:%M') - $(thedate.sh)\" | wl-copy"
-    },
-
     "custom/clock":{
       "format":"{}",
       "tooltip":false,
@@ -365,11 +329,6 @@
     "custom/system-icon": {
       "format":" ",
       "on-click":"~/.config/scripts/wallpaper.sh -m",
-    },
-
-    "custom/icon": {
-      "format":" ",
-      "on-click":"exec ~/.config/scripts/rotation-toggle.sh"
     },
 
     "mpd": {

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-choice=$(echo -e " /* Box */\n ANSI box\n Transfer Photos\n Download video\n Download audio" | rofi -dmenu -p "Quick Actions")
+choice=$(echo -e " /* Box */\n ANSI box\n Transfer Photos\n Download video\n Download audio\n󰆄 Ascii to binary\n󰆄 Binary to ascii" | rofi -dmenu -p "Quick Actions")
 
 process_clipboard ()
 {
@@ -50,5 +50,11 @@ case "$choice" in
     ;;
   " Download audio")
     ~/.config/scripts/downloader.sh -a "$(wl-paste)"
+    ;;
+  "󰆄 Ascii to binary")
+    wl-paste | xxd -b | cut -d' ' -f2-7 | tr -d '\n ' | wl-copy
+    ;;
+  "󰆄 Binary to ascii")
+    wl-paste | sed 's/.\{8\}/& /g' | xxd -r -b | wl-copy
     ;;
 esac
