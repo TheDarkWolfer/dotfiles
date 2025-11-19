@@ -19,7 +19,7 @@
     "modules-left": [
       "group/powermenu",
       "group/expand-left",
-      "group/tray-display",
+      "group/tray-display"
 	  ],
 
     "modules-center": [
@@ -38,6 +38,13 @@
     "custom/powermenu":{
         "format":" ",
         "tooltip":false,
+    },
+    
+    "custom/slope-left":{
+      "format":"  "
+    },
+    "custom/slope-right":{
+      "format":"  "
     },
 
     "group/powermenu":{
@@ -256,11 +263,13 @@
         "markup":"pango",
         "states":{
           "warning":40,
-          "critical":20
+          "critical":20,
+          "abhorrent":10
         },
         "events":{
           "on-discharging-warning":"notify-send -u normal 'Low battery'",
           "on-discharging-critical":"notify-send -u critical 'Battery critical",
+          "on-dischargin-abhorrent":"aplay ~/Flair/ascend.wav && notify-send -u critical 'Plug me in you fuckwad'",
          "on-charging-100":"notify-send -u normal 'Battery full'",
         }
     },
@@ -336,9 +345,9 @@
     "on-click-right":"rmpc togglerepeat",
     "on-scroll-up":"rmpc next",
     "on-scroll-down":"rmpc prev",
-    "title-len":21,
-    "artist-len":21,
-    "format": "{stateIcon} {consumeIcon} {randomIcon} {repeatIcon} {singleIcon} {title} - {artist} ({elapsedTime:%M:%S}/{totalTime:%M:%S})  ",
+    "title-len":13,
+    "artist-len":13,
+    "format": "{stateIcon} {consumeIcon} {randomIcon} {repeatIcon} {singleIcon} {title} - {elapsedTime:%M:%S}/{totalTime:%M:%S})  ",
     "format-disconnected": "Disconnected  ",
     "format-stopped": "{consumeIcon} {randomIcon} {repeatIcon} {singleIcon} Stopped  ",
     "interval": 1,

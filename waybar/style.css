@@ -42,6 +42,11 @@ window#waybar {
   border-radius: 0px 0px 16px 16px;
 }
 
+#custom-slope-left,
+#custom-slope-right {
+  background-color:@iris;
+}
+
 #backlight,
 #temperature,
 #memory,
@@ -169,10 +174,6 @@ window#waybar {
   }
 }
 
-#mpd:hover {
-  animation: mpd-fade 0.5s ease-in-out infinite alternate;
-}
-
 #mpd {
   padding: 7px 13px;
   color:@muted;
@@ -197,6 +198,16 @@ window#waybar {
   color:@iris;
   animation: mpd-fade 0.5s ease-in-out infinite alternate;
 }
+
+
+#mpd:hover {
+  animation-name: mpd-pulse;
+  animation-duration: 0.7s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate
+}
+
 
 #custom-expand-right,
 #custom-tray-display {

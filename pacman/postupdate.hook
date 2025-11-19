@@ -1,0 +1,9 @@
+[Trigger]
+Operation = Upgrade
+Type = Package
+Target = *
+
+[Action]
+Description = Running post-update fixes
+When = PostTransaction
+Exec = /usr/local/bin/postupdate.sh

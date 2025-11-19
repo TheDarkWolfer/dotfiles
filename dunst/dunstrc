@@ -1,5 +1,5 @@
 [global]
-monitor = 0
+monitor = "eDP-1"
 follow = none
 width = 150
 height = (0, 300)

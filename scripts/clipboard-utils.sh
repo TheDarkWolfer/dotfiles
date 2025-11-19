@@ -35,6 +35,8 @@ copy_photos() {
 }
 
 
+
+
 case "$choice" in 
   " /* Box */")
     process_clipboard jstone

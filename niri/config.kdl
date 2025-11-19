@@ -325,6 +325,11 @@ window-rule {
   open-maximized true
 }
 
+window-rule {
+  match app-id="Minecraft*"
+  open-on-output "HDMI-A-1"
+}
+
 // Always maximize chromium as well
 window-rule {
   match app-id="chrome*"
@@ -520,13 +525,15 @@ binds {
     // shows a list of important hotkeys.
     Mod+Shift+exclam { show-hotkey-overlay; }
 
-    XF86Calculator { spawn "~/.config/scripts/hexecute"; }
+    F11 { spawn "~/.config/scripts/hexecute"; }
     //XF86Calculator { toggle-overview;}
 
+    Mod+Shift+A { spawn "~/.config/scripts/calculator.sh";}
+
     // Chamel - drawing on screen
-    F1 { spawn "~/.cargo/bin/chamel" "toggle"; }
-    F2 { spawn "~/.cargo/bin/chamel" "undo"; }
-    F3 { spawn "~/.cargo/bin/chamel" "clear"; }
+    Mod+F1 { spawn "~/.cargo/bin/chamel" "toggle"; }
+    Mod+F2 { spawn "~/.cargo/bin/chamel" "undo"; }
+    Mod+F3 { spawn "~/.cargo/bin/chamel" "clear"; }
     //F4 { spawn "~/.cargo/bin/chamel" "exit"; }
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Shift+Return { spawn "kitty" "--hold" "--title" "KITTY" "niri" "msg" "action" "center-column"; }
@@ -580,8 +587,8 @@ binds {
 
     XF86WakeUp           hotkey-overlay-title=null allow-when-locked=true { spawn "hyprlock" "-c" "~/.config/ni"; }
 
-    XF86MonBrightnessDown hotkey-overlay-title=null allow-when-locked=true {spawn "brightnessctl" "s" "1%-" "--device=*"; }
-    XF86MonBrightnessUp hotkey-overlay-title=null allow-when-locked=true {spawn "brightnessctl" "s" "1%+" "--device=*"; }
+    XF86MonBrightnessDown hotkey-overlay-title=null allow-when-locked=true {spawn "brightnessctl" "s" "5%-" "--device=*"; }
+    XF86MonBrightnessUp hotkey-overlay-title=null allow-when-locked=true {spawn "brightnessctl" "s" "5%+" "--device=*"; }
 
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
