@@ -176,7 +176,7 @@ window#waybar {
 
 #mpd {
   padding: 7px 13px;
-  color:@muted;
+  color:@iris;
   background:@surface;
   border-radius:42px;
 }
@@ -196,7 +196,11 @@ window#waybar {
 
 #mpd.playing {
   color:@iris;
-  animation: mpd-fade 0.5s ease-in-out infinite alternate;
+  animation: mpd-fade ;
+  animation-duration:0.7s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate
 }
 
 
@@ -210,6 +214,7 @@ window#waybar {
 
 
 #custom-expand-right,
+#custom-expand-left,
 #custom-tray-display {
   padding:1 3px ;
   color:@text;
@@ -269,8 +274,8 @@ window#waybar {
 #tray,
 #custom-datetime,
 #custom-ollama-status,
-#custom-rotation-status,
-#mpd {
+#custom-rotation-status
+{
   padding:0px 8px;
   background:@surface;
   color:@iris;
@@ -308,8 +313,8 @@ window#waybar {
 #network,
 #custom-datetime,
 #custom-rotation-status,
-#custom-ollama-status,
-#mpd {
+#custom-ollama-status 
+{
   border-top-right-radius:42px;
   border-bottom-right-radius:42px;
   border-top-left-radius:0px;
@@ -329,7 +334,7 @@ window#waybar {
 
 #window:hover {
     animation-name: iris-pulse;
-    animation-duration: 0.7s;
+animation-duration: 0.7s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
     animation-direction: alternate;
