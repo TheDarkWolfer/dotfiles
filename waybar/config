@@ -57,6 +57,16 @@
         "modules":["custom/powermenu","custom/sleep","custom/lock","custom/logout","custom/reboot","custom/poweroff"],
     },
 
+    "wlr/taskbar": {
+        // "all-outputs": true,
+        // "format": "{icon} {title} {short_state}",
+        "format": "{icon}",
+        "tooltip-format": "{title} | {app_id}",
+        "on-click": "activate",
+        "on-click-middle": "close",
+        "on-click-right": "fullscreen"
+    },
+
     "custom/cava": {
       "exec":"~/.config/scripts/waybar-vis.sh",
       "format":"{}"
@@ -86,7 +96,7 @@
           "transition-to-right": true,
           "click-to-reveal": true
         },
-        "modules":["custom/tray-display","custom/recording-status","tray","custom/ollama-status"],
+        "modules":["custom/tray-display","custom/recording-status","tray","custom/ollama-status","wlr/taskbar"],
     },
 
     "group/hardware":{
@@ -247,7 +257,7 @@
 
     "wireplumber": {
         "format": "{icon} {volume}%",
-        "format-muted": "󰝟 ",
+        "format-muted": "󰝟     ",
         "on-click-right": "killall pavucontrol || pavucontrol &",
         "format-icons": [" ", " ", " ", " ", " "]
     },

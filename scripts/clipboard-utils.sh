@@ -57,6 +57,8 @@ case "$choice" in
     wl-paste | xxd -b | cut -d' ' -f2-7 | tr -d '\n ' | wl-copy
     ;;
   "󰆄 Binary to ascii")
-    wl-paste | sed 's/.\{8\}/& /g' | xxd -r -b | wl-copy
+    #wl-paste | sed 's/.\{8\}/& /g' | xxd -r -b | wl-copy
+    
+    wl-paste | grep -oE '.{8}' | while read b; do printf "%b" "$(printf "\\x%02X" "$((2#$b))")"; done | wl-copy
     ;;
 esac

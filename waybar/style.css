@@ -42,6 +42,7 @@ window#waybar {
   border-radius: 0px 0px 16px 16px;
 }
 
+
 #custom-slope-left,
 #custom-slope-right {
   background-color:@iris;
@@ -51,11 +52,9 @@ window#waybar {
 #temperature,
 #memory,
 #cpu,
-#wireplumber,
 #disk,
 #window,
 #battery,
-#wireplumber,
 #window,
 #cpu,
 #memory,
@@ -174,11 +173,23 @@ window#waybar {
   }
 }
 
+#wireplumber {
+  color:@iris;
+  background-color:@surface;
+  padding: 7px 13px;
+  border-radius: 0px 42px 42px 0px;
+}
+
+#wireplumber.muted {
+  color:@muted;
+  background-color:@surface;
+}
+
 #mpd {
   padding: 7px 13px;
   color:@iris;
   background:@surface;
-  border-radius:42px;
+  border-radius:0px 42px 42px 0px;
 }
 
 #mpd.disconnected {
@@ -212,6 +223,30 @@ window#waybar {
   animation-direction: alternate
 }
 
+@keyframes slow-highlight {
+  from { background-color: @surface; }
+  to   { background-color: @text; }
+}
+
+
+#taskbar {
+  background-color: @surface;
+  color:@text;
+  padding:0px 2px;
+  border-radius: 42px 42px 42px 42px;
+}
+
+#taskbar button {
+  border-radius:21px;
+  padding:7px;
+  background-color:@surface;
+  transition: background-color 0.7s ease-in-out;
+}
+
+#taskbar button:hover {
+  background-color:@text;
+}
+
 
 #custom-expand-right,
 #custom-expand-left,
@@ -225,6 +260,7 @@ window#waybar {
   color:@iris;
 }
 
+#custom-expand-left:hover,
 #custom-expand-right.on:hover, 
 #custom-expand-right:hover {
   color:@rose;
@@ -270,7 +306,6 @@ window#waybar {
 #bluetooth,
 #backlight,
 #custom-recording-status,
-#wireplumber,
 #tray,
 #custom-datetime,
 #custom-ollama-status,

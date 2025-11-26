@@ -25,8 +25,10 @@ c.colors.webpage.darkmode.policy.images = 'smart'
 
 config.set('colors.webpage.darkmode.enabled', False, 'https://louie.co.nz/25th_hour/*')
 
+config.set("content.headers.user_agent",'Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36')
+
 c.url.searchengines = {
-    'DEFAULT': 'https://www.startpage.com/?q={}',
+    'DEFAULT': 'https://www.duckduckgo.com/?q={}',
     'g': 'https://www.google.com/search?q={}',
     'yt': 'https://www.youtube.com/results?search_query={}',
     'gh': 'https://github.com/search?q={}',
@@ -53,8 +55,8 @@ config.bind('Ya', 'spawn --userscript video-music-downloader.sh --audio')
 # Clear history
 config.bind('Ch', 'history-clear')
 
-# Go back to startpage
-config.bind('Sp','open www.startpage.com')
+# Go back to duckduckgo
+config.bind('Sp','open www.duckduckgo.com')
 
 # Yoinking location & maps off of whatever IP
 config.bind('Xe', 'spawn --userscript iggy')
