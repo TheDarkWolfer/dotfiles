@@ -88,6 +88,7 @@
             "type": "custom",
             "format": "└{$1}────────────────────{$1}┘"
         },
+				"break",
         {
           "type": "custom",
           "outputColor":"magenta",
@@ -98,6 +99,7 @@
           "outputColor":"magenta",
           "format": "                               que vivir en rodillas "
         },
+				"break",
         {
             "type": "colors",
             "paddingLeft": 34,
