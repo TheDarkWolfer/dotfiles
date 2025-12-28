@@ -45,9 +45,26 @@ case "$1" in
     ln -s ~/.config/waybar/config ./waybar/config
     ln -s ~/.config/waybar/style.css ./waybar/style.css
 
-    # Symlink all the fucking shell scripts I use x)
-     
+		# Time for installing yay and the rest of the packages I need
+		if ! command -v yay > /dev/null 2>&1; then
+			echo "yay not found, installing it real quick..."
+			git clone https://aur.archlinux.org/yay.git 
+			cd yay 
+			makepkg -si
+			echo "Done ! Now you can access the AUR !"
+		fi
+						echo "Installing CLI tools..."
+			yay -S bat zoxide eza rmpc neovim zsh yazi wireguard-tools tesseract wl-clipboard ollama acpi jq caligula fzf starship
+			echo "Done !"
+			
+			# Installing GUI tools afterwards, since some require libraries or tools we install in the previous step. 
+			# I'd say it's not mandatory, but better safe than sorry
+			echo "Installing graphical tools..."
+			yay -S ttf-firacode-nerd rofi waybar niri qutebrowser librewolf kitty dolphin kleopatra signal-desktop veracrypt localsend brightnessctl sxiv udiskie swww-daemon wpctl brighnessctl okular keepassxc gucharmap libreoffice-still
+			echo "Done !"
 
+			echo "Installing miscellaneous tools..."
+			yay -S  
     ;;
  -u|--uninstall)
     echo "Removing dotfiles NYI"

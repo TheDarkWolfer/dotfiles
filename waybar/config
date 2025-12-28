@@ -24,8 +24,7 @@
 
     "modules-center": [
       "niri/window",
-      "custom/heart",
-      //"niri/workspaces",
+      "niri/workspaces",
       //"custom/cava",
       "custom/clock",
     ],
@@ -48,7 +47,7 @@
     },
 
     "group/powermenu":{
-        "orientation":"horizontal",
+      "orientation":"horizontal",
         "drawer":{
           "transition-duration":600,
           "transition-to-right": true,
@@ -61,6 +60,7 @@
         // "all-outputs": true,
         // "format": "{icon} {title} {short_state}",
         "format": "{icon}",
+				"tooltip":false,
         "tooltip-format": "{title} | {app_id}",
         "on-click": "activate",
         "on-click-middle": "close",
@@ -96,7 +96,7 @@
           "transition-to-right": true,
           "click-to-reveal": true
         },
-        "modules":["custom/tray-display","custom/recording-status","tray","custom/ollama-status","wlr/taskbar"],
+        "modules":["custom/tray-display","custom/recording-status","tray","custom/ollama-status"],
     },
 
     "group/hardware":{
@@ -386,7 +386,7 @@
         "tooltip":false,
         "icon": false,
         "icon-size": 22,
-        "on-click":"niri msg action toggle-overview",
+        "on-click":"~/.config/scripts/hexecute",
         "format":"{} ",
         "rewrite": { 
             ".*LibreWolf.*": " 𝓘𝓷𝓽𝓮𝓻𝓷𝓮𝓽",
@@ -413,6 +413,7 @@
             ".*Codium.*":" 𝓓𝓮𝓿𝓮𝓵𝓸𝓹𝓶𝓮𝓷𝓽  ",
             ".*Virtual Machine Manager.*":" 𝓥𝓲𝓻𝓽𝓾𝓪𝓵 𝓜𝓪𝓬𝓱𝓲𝓷𝓮𝓼  ",
             ".*Chromium.*":" 𝓒𝓱𝓻𝓸𝓶𝓲𝓾𝓶",
+						".*Thunderbird.*":" 𝐸𝓂𝒶𝒾𝓁𝓈",
 
         },
     },

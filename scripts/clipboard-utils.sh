@@ -1,6 +1,15 @@
 #!/usr/bin/env bash
 
-choice=$(echo -e " /* Box */\n ANSI box\n Transfer Photos\n Download video\n Download audio\n󰆄 Ascii to binary\n󰆄 Binary to ascii" | rofi -dmenu -p "Quick Actions")
+if [[ -f "/tmp/tunnel.pid" ]] ; then
+	TUNNEL_CHOICE="󰌸 Close tunnel to Arch-Félisse"
+else
+	TUNNEL_CHOICE="󰌷 Open tunnel to Arch-Félisse"
+fi
+
+choice=$(echo -e " Kaomojis\n$TUNNEL_CHOICE\n ANSI box\n Transfer Photos\n Download video\n Download audio\n󰆄 Ascii to binary\n󰆄 Binary to ascii" | rofi -dmenu -p "Quick Actions")
+
+# Old options I'm not using that much anymore
+#  /* Box */
 
 process_clipboard ()
 {
@@ -37,7 +46,13 @@ copy_photos() {
 
 
 
-case "$choice" in 
+case "$choice" in
+	" Kaomojis")
+		cat ~/kaomoji.md | grep -v '[#`\n]' | rofi -dmenu -p "Pick a kaomoji ^.^" -theme-str '#inputbar { enabled : false; } ' | wl-copy -n
+		;;
+	"$TUNNEL_CHOICE")
+		~/.config/scripts/tunnel-ArchFelisse.sh
+		;;
   " /* Box */")
     process_clipboard jstone
     ;;

@@ -100,10 +100,18 @@ window-rule {
     }
 }
 
+window-rule {
+    match title="Kando Menu"
+    open-floating true
+    border { off; }
+    shadow { off; }
+}
 
 cursor {
   xcursor-theme "BreezeX-RosePine-Linux"
   xcursor-size 42
+
+  hide-after-inactive-ms 1000
 }
 // You can configure outputs by their name, which you can find
 // by running `niri msg outputs` while inside a niri instance.
@@ -121,13 +129,15 @@ output "eDP-1" {
 output "HDMI-A-1" {
   mode "1920x1080@60.000"
   scale 1
-  position x=0 y=-1080
+  //position x=0 y=-1080
+ position x=1920 y=-1080
+
 }
 
 output "DP-2" {
   mode "1920x1080@60.000"
   scale 1
-  position x=1920 y=-1080
+  //position x=1920 y=-1080
 }
 
 output "DP-1" {
@@ -145,6 +155,11 @@ output "DSI-1" {
 layer-rule {
     match namespace="swww-daemon"
     place-within-backdrop true
+}
+
+layer-rule {
+	match namespace="alacritty"
+	place-within-backdrop true
 }
 
 layer-rule {
@@ -332,12 +347,6 @@ window-rule {
 // Always maximize chromium as well
 window-rule {
   match app-id="chrome*"
-  open-maximized true
-}
-
-// Same for obsidian
-window-rule {
-  match app-id="obsidian*"
   open-maximized true
 }
 
@@ -537,7 +546,7 @@ window-rule {
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
 window-rule {
-    geometry-corner-radius 12
+    geometry-corner-radius 13
     clip-to-geometry true
 }
 
@@ -619,8 +628,10 @@ binds {
 
     Mod+U hotkey-overlay-title="USBGuard manager"{ spawn "kitty" "--title" "USB Menu" "sh" "-c" "~/.config/scripts/usb-menu.sh"; }
 
+		Mod+M hotkey-overlay-title=null { spawn "~/.config/scripts/monitor-focus.sh" ; }
     Mod+Shift+W hotkey-overlay-title="Change wallpaper" { spawn "bash" "-c" "~/.config/scripts/wallpaper.sh -m"; }
     Mod+G hotkey-overlay-title="Clipboard history" { spawn "bash" "-c" "~/.config/scripts/clipboard-history.sh"; }
+		Mod+Shift+G hotkey-overlay-title=null { spawn "cliphist" "wipe";}
 
     Mod+B hotkey-overlay-title="Calculator" { spawn "~/.config/scripts/calculator.sh" ; }
 
@@ -849,7 +860,9 @@ binds {
     Mod+MouseMiddle hotkey-overlay-title=null {spawn "bash" "-c" "~/.config/scripts/clipboard-image.sh -t"; }
     Mod+Shift+C hotkey-overlay-title="Grab text/qr from screen"{spawn "bash" "-c" "~/.config/scripts/clipboard-image.sh -t"; }
 
-
+		Mod+F9 hotkey-overlay-title=null { screenshot show-pointer=false ;}
+		Mod+Shift+F9 hotkey-overlay-title=null {spawn "bash" "-c" "~/.config/scripts/screen-record.sh";}
+		
     // Applications such as remote-desktop clients and software KVM switches may
     // request that niri stops processing the keyboard shortcuts defined here
     // so they may, for example, forward the key presses as-is to a remote machine.
