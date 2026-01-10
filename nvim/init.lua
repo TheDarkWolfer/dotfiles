@@ -14,6 +14,18 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Function to treat files with a name in all caps as markdown files (I usually don't add file extensions 
+-- to my markdown files, so I kinda needed that little tweak)
+vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"},{
+	callback = function(args)
+		local name = vim.fn.fnamemodify(args.file, ":t")
+
+		if not name:find("%.") and name:match("^[A-Z0-9_]+$") then
+			vim.bo[args.buf].filetype = "markdown"
+		end
+	end,
+})
+
 -- Function to handle my notes better, by letting me pick which
 -- note subfolder to focus on
 
