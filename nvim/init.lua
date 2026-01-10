@@ -14,6 +14,24 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Function to handle my notes better, by letting me pick which
+-- note subfolder to focus on
+
+local function cd_notes_subfolder()
+  require('telescope.builtin').find_files({
+    prompt_title = 'Notes folders',
+    cwd = '~/Notes',
+    find_command = {
+      'find',
+      '.',
+      '-maxdepth', '1',
+      '-type', 'd',
+      '!',
+      '-name', '.',
+    },
+  })
+end
+
 -- Make sure to setup `mapleader` and `maplocalleader` before
 -- loading lazy.nvim so that mappings are correct.
 -- This is also a good place to setup other settings (vim.opt)
@@ -74,12 +92,13 @@ require("lazy").setup({
 							'',
         },
         shortcut = {
-          { desc = '󰉋 Files', group = 'Label', key = 'f', action = 'NvimTreeToggle' },
-          { desc = '󰭎 Search',  group = 'Label', key = 'g', action = 'Telescope live_grep' },
-		{ desc = '󰝒 New', group = 'Label', key = 'n', action = 'tabnew' },
-		{ desc = '󰯉 Zsh', group = 'Label', key = 't', action = 'term'},
-		--{ desc = ' Notes', group = 'Label', key = 'x', action = 'cd ~/Documents/Notes'},
-		{ desc = '󰲶 Config', group = 'Label', key = 'e', action = 'e ~/.config/nvim/init.lua'},
+          { desc = '󰉋 Files ', group = 'Label', key = 'f', action = 'NvimTreeToggle' },
+          { desc = '󰭎 Search ',  group = 'Label', key = 'g', action = 'Telescope live_grep' },
+		{ desc = '󰝒 New ', group = 'Label', key = 'e', action = 'tabnew' },
+		{ desc = '󰯉 Zsh ', group = 'Label', key = 't', action = 'term'},
+		--{ desc = ' Notes', group = 'Label', key = 'n', action = function() vim.cmd("cd ~/Notes/")	vim.cmd("Telescope find_files")	end,},
+							{ desc = '󰲶 Notes ', group = 'Label', key = 'n', action = cd_notes_subfolder, },
+		{ desc = ' Config ', group = 'Label', key = 'c', action = 'e ~/.config/nvim/init.lua'},
         },
 
         footer = {'', '╭───────────────────────╮',' Prefiero morir de pie ',' que vivir en rodillas ','╰───────────────────────╯',' ⚝ ' },
