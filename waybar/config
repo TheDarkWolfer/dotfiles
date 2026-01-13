@@ -200,7 +200,7 @@
         "tooltip-format-enumerate-connected": "{device_alias}\n{device_address}",
         "tooltip-format-enumerate-connected-battery": "{device_alias}\n{device_address}\n{device_battery_percentage}%",
         "on-click-right": "blueman-manager",
-        "on-click":"bluetoothctl connect C8:2B:6B:7A:5C:1A"
+        "on-click":"bluetoothctl connect E4:58:BC:44:CD:21"
     },
     "custom/recording":{
       "exec":"exec ~/.config/scripts/screen-record.sh -s",
@@ -280,7 +280,7 @@
           "on-discharging-warning":"notify-send -u normal 'Low battery'",
           "on-discharging-critical":"notify-send -u critical 'Battery critical",
           "on-dischargin-abhorrent":"aplay ~/Flair/ascend.wav && notify-send -u critical 'Plug me in you fuckwad'",
-         "on-charging-100":"notify-send -u normal 'Battery full'",
+					//"on-charging-100":"notify-send -u normal 'Battery full'",
         }
     },
 

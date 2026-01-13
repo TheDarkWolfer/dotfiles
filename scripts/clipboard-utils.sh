@@ -6,7 +6,7 @@ else
 	TUNNEL_CHOICE="󰌷 Open tunnel to Arch-Félisse"
 fi
 
-choice=$(echo -e " Kaomojis\n$TUNNEL_CHOICE\n ANSI box\n Transfer Photos\n Download video\n Download audio\n󰆄 Ascii to binary\n󰆄 Binary to ascii" | rofi -dmenu -p "Quick Actions")
+choice=$(echo -e " Kaomojis\n$TUNNEL_CHOICE\n󰈊 Color Picker\n ANSI box\n Transfer Photos\n Download video\n Download audio\n󰆄 Ascii to binary\n󰆄 Binary to ascii\n USB Thief" | rofi -dmenu -p "Quick Actions")
 
 # Old options I'm not using that much anymore
 #  /* Box */
@@ -41,6 +41,11 @@ copy_photos() {
   done < <(find "$SRC" -type f -print0)
 
   dunstify "Copy complete!" "Transferred $COUNT files." -h int:value:100 -r "$id"
+
+	DEVICE="/dev/$(lsblk | grep CAMERA-SD | awk '{print $1}')"
+	umount "$DEVICE"
+	
+	dunstify "SD Card unmounted !"
 }
 
 
@@ -59,6 +64,9 @@ case "$choice" in
   " ANSI box")
     process_clipboard ansi-rounded
     ;;
+	"󰈊 Color Picker")
+		hyprpicker -af hex
+		;;
   " Transfer Photos")
     copy_photos
     ;;
@@ -76,4 +84,7 @@ case "$choice" in
     
     wl-paste | grep -oE '.{8}' | while read b; do printf "%b" "$(printf "\\x%02X" "$((2#$b))")"; done | wl-copy
     ;;
+	" USB Thief")
+		~/.config/scripts/yoinkotron.sh 
+		;;
 esac

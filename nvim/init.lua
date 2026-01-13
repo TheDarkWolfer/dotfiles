@@ -14,6 +14,47 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Function to treat files with a name in all caps as markdown files (I usually don't add file extensions 
+-- to my markdown files, so I kinda needed that little tweak)
+vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"},{
+	callback = function(args)
+		local name = vim.fn.fnamemodify(args.file, ":t")
+
+		if not name:find("%.") and name:match("^[A-Z0-9_]+$") then
+			vim.bo[args.buf].filetype = "markdown"
+		end
+	end,
+})
+-- In the same spirit, a few filetype associations that aren't automatic
+vim.filetype.add({
+  extension = {
+    tsx = "typescriptreact",
+    ts  = "typescript",
+  },
+})
+
+-- Function to handle my notes better, by letting me pick which
+-- note subfolder to focus on
+
+local function cd_notes_subfolder()
+  require('telescope.builtin').find_files({
+    prompt_title = 'Notes folders',
+    cwd = '~/Notes',
+    find_command = {
+      'find',
+      '.',
+      '-maxdepth', '1',
+      '-type', 'd',
+      '!',
+      '-name', '.',
+    },
+  })
+end
+
+-- Keep selection when indenting in Visual mode
+vim.keymap.set("v", ">", ">gv", { noremap = true, silent = true })
+vim.keymap.set("v", "<", "<gv", { noremap = true, silent = true })
+
 -- Make sure to setup `mapleader` and `maplocalleader` before
 -- loading lazy.nvim so that mappings are correct.
 -- This is also a good place to setup other settings (vim.opt)
@@ -36,9 +77,61 @@ require("lazy").setup({
 			opts = {
 				inverses = {
 					[ "left" ] = "right",
+					[ "true" ] = "false",
+					[ "True" ] = "False",
 				}
 			}
 		},
+
+	{
+	    'numToStr/Comment.nvim',
+	    opts = {
+	      ---Add a space b/w comment and the line
+	      padding = true,
+	      ---Whether the cursor should stay at its position
+	      sticky = true,
+	      ---Lines to be ignored while (un)comment
+	      ignore = nil,
+	      ---LHS of toggle mappings in NORMAL mode
+	      toggler = {
+		  ---Line-comment toggle keymap
+		  line = 'gcc',
+		  ---Block-comment toggle keymap
+		  block = 'gbc',
+	      },
+	      ---LHS of operator-pending mappings in NORMAL and VISUAL mode
+	      opleader = {
+		  ---Line-comment keymap
+		  line = 'gc',
+		  ---Block-comment keymap
+		  block = 'gb',
+	      },
+	      ---LHS of extra mappings
+	      extra = {
+		  ---Add comment on the line above
+		  above = 'gcO',
+		  ---Add comment on the line below
+		  below = 'gco',
+		  ---Add comment at the end of line
+		  eol = 'gcA',
+	      },
+	      ---Enable keybindings
+	      ---NOTE: If given `false` then the plugin won't create any mappings
+	      mappings = {
+		  ---Operator-pending mapping; `gcc` `gbc` `gc[count]{motion}` `gb[count]{motion}`
+		  basic = true,
+		  ---Extra mapping; `gco`, `gcO`, `gcA`
+		  extra = false
+	      },
+	      ---Function to call before (un)comment
+	      pre_hook = nil,
+	      ---Function to call after (un)comment
+	      post_hook = nil,
+      }
+    },
+
+
+
 	{
     		'nvim-telescope/telescope.nvim', tag = 'v0.1.9',
      		dependencies = { 'nvim-lua/plenary.nvim' },
@@ -74,12 +167,13 @@ require("lazy").setup({
 							'',
         },
         shortcut = {
-          { desc = '󰉋 Files', group = 'Label', key = 'f', action = 'NvimTreeToggle' },
-          { desc = '󰭎 Search',  group = 'Label', key = 'g', action = 'Telescope live_grep' },
-		{ desc = '󰝒 New', group = 'Label', key = 'n', action = 'tabnew' },
-		{ desc = '󰯉 Zsh', group = 'Label', key = 't', action = 'term'},
-		--{ desc = ' Notes', group = 'Label', key = 'x', action = 'cd ~/Documents/Notes'},
-		{ desc = '󰲶 Config', group = 'Label', key = 'e', action = 'e ~/.config/nvim/init.lua'},
+          { desc = '󰉋 Files ', group = 'Label', key = 'f', action = 'NvimTreeToggle' },
+          { desc = '󰭎 Search ',  group = 'Label', key = 'g', action = 'Telescope live_grep' },
+		{ desc = '󰝒 New ', group = 'Label', key = 'e', action = 'tabnew' },
+		{ desc = '󰯉 Zsh ', group = 'Label', key = 't', action = 'term'},
+		--{ desc = ' Notes', group = 'Label', key = 'n', action = function() vim.cmd("cd ~/Notes/")	vim.cmd("Telescope find_files")	end,},
+							{ desc = '󰲶 Notes ', group = 'Label', key = 'n', action = cd_notes_subfolder, },
+		{ desc = ' Config ', group = 'Label', key = 'c', action = 'e ~/.config/nvim/init.lua'},
         },
 
         footer = {'', '╭───────────────────────╮',' Prefiero morir de pie ',' que vivir en rodillas ','╰───────────────────────╯',' ⚝ ' },
@@ -322,10 +416,9 @@ require("lazy").setup({
 vim.opt.clipboard = "unnamedplus"
 
 -- Amount of spaces for a tabulation
-vim.opt.tabstop = 2      -- how many spaces a TAB shows as
-vim.opt.shiftwidth = 2   -- indentation size
-vim.opt.softtabstop = 2  -- number of spaces inserted when pressing TAB
-vim.opt.expandtab = false
+vim.opt.tabstop = 8 -- Always 8 (see :h tabstop)
+vim.opt.softtabstop = 2 -- What you expecting
+vim.opt.shiftwidth = 2
 
 -- Set rose-pine as our color scheme because I love it <3
 vim.cmd.colorscheme("rose-pine")
