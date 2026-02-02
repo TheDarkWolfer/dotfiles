@@ -70,7 +70,9 @@ require("lazy").setup({
   spec = {
     -- add your plugins here
 	{"rose-pine/neovim", name = "rose-pine" },
-	{"jbyuki/venn.nvim", name = "venn"},
+	{
+	  "jbyuki/venn.nvim",
+	},
 	{
 			'nguyenvukhang/nvim-toggler', 
 			name = "toggler",
@@ -395,6 +397,19 @@ require("lazy").setup({
   },
   opts_extend = { "sources.default" }
 },
+
+  {
+  "RRethy/vim-hexokinase",
+  build = "make hexokinase",
+  config = function()
+    vim.g.Hexokinase_highlighters = {
+      "virtual", -- Show colors in virtual text
+      "background", -- Highlight background
+    }
+  end,
+},
+
+
 {
     "m4xshen/autoclose.nvim",
     event = "InsertEnter",
@@ -419,6 +434,25 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.tabstop = 8 -- Always 8 (see :h tabstop)
 vim.opt.softtabstop = 2 -- What you expecting
 vim.opt.shiftwidth = 2
+
+-- For venn.nvim - making my life easier
+vim.opt.ve = "all"
+vim.keymap.set("v","<leader>vf",":VBox<CR>",{desc="Draw box around selection"})
+
+vim.keymap.set("v", "H", "<C-v>h:VBox<CR>", { noremap = true })
+vim.keymap.set("v", "J", "<C-v>j:VBox<CR>", { noremap = true })
+vim.keymap.set("v", "K", "<C-v>k:VBox<CR>", { noremap = true })
+vim.keymap.set("v", "L", "<C-v>l:VBox<CR>", { noremap = true })
+
+-- Make it a crosshair via highlighting
+vim.api.nvim_set_hl(0, "Cursor", { bg = "NONE", underline = true, reverse = true })
+
+
+-- Make the cursor appear as a crosshair by blending it with the background
+vim.api.nvim_set_hl(0, "Cursor", { bg = "NONE", underline = true, reverse = true })
+
+-- toggle keymappings for venn using <leader>v
+-- vim.api.nvim_set_keymap('n', '<leader>v', ":lua Toggle_venn()<CR>", { noremap = true})
 
 -- Set rose-pine as our color scheme because I love it <3
 vim.cmd.colorscheme("rose-pine")
