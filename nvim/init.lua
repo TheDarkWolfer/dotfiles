@@ -73,7 +73,15 @@ require("lazy").setup({
 	{
 	  "jbyuki/venn.nvim",
 	},
-	{
+	  {
+	  "3rd/image.nvim",
+	  build = false, -- so that it doesn't build the rock https://github.com/3rd/image.nvim/issues/91#issuecomment-2453430239
+	  opts = {
+	      processor = "magick_cli",
+	  }
+	},
+	
+    {
 			'nguyenvukhang/nvim-toggler', 
 			name = "toggler",
 			opts = {
@@ -81,9 +89,22 @@ require("lazy").setup({
 					[ "left" ] = "right",
 					[ "true" ] = "false",
 					[ "True" ] = "False",
+					[ "╭" ] = "┌",
+					[ "╮" ] = "┐",
+					[ "╰" ] = "└",
+					[ "╯" ] = "┘",
 				}
 			}
 		},
+
+	{
+	  "rachartier/tiny-glimmer.nvim",
+	  event = "VeryLazy",
+	  priority = 10, -- Low priority to catch other plugins' keybindings
+	  config = function()
+	      require("tiny-glimmer").setup()
+	  end,
+	},
 
 	{
 	    'numToStr/Comment.nvim',
@@ -351,7 +372,6 @@ require("lazy").setup({
   -- build = 'cargo build --release',
   -- If you use nix, you can build from source using latest nightly rust with:
   -- build = 'nix run .#build-plugin',
-
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
@@ -429,6 +449,14 @@ require("lazy").setup({
 
 -- Use system clipboard, makes my life easier
 vim.opt.clipboard = "unnamedplus"
+
+-- Disable blink.cmp in markdown files
+vim.api.nvim_create_autocmd('BufEnter', {
+  pattern = '*.md',
+  callback = function()
+    vim.b.completion = false
+  end,
+})
 
 -- Amount of spaces for a tabulation
 vim.opt.tabstop = 8 -- Always 8 (see :h tabstop)
