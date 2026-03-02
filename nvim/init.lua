@@ -80,7 +80,26 @@ require("lazy").setup({
 	      processor = "magick_cli",
 	  }
 	},
-	
+
+    { "elentok/encrypt.nvim", opts = {} },
+
+
+    {
+      "nvim-telekasten/telekasten.nvim",
+      dependencies = { "nvim-telescope/telescope.nvim" },
+      config = function()
+	require("telekasten").setup({
+	  home = vim.fn.expand("~/Notes"),
+
+	  -- Optional but nice:
+	  auto_set_filetype = false,
+	  dailies = vim.fn.expand("~/Notes/daily"),
+	  weeklies = vim.fn.expand("~/Notes/weekly"),
+	  templates = vim.fn.expand("~/Notes/templates"),
+	})
+      end,
+    },
+
     {
 			'nguyenvukhang/nvim-toggler', 
 			name = "toggler",
@@ -103,6 +122,45 @@ require("lazy").setup({
 	  priority = 10, -- Low priority to catch other plugins' keybindings
 	  config = function()
 	      require("tiny-glimmer").setup()
+	  end,
+	},
+
+	{
+	  "folke/which-key.nvim",
+	  event = "VeryLazy",
+	  opts = {
+	    -- your configuration comes here
+	    -- or leave it empty to use the default settings
+	    -- refer to the configuration section below
+	  },
+	  keys = {
+	    {
+	      "<leader>?",
+	      function()
+		require("which-key").show({ global = false })
+	      end,
+	      desc = "Buffer Local Keymaps (which-key)",
+	    },
+	  },
+	},
+
+	{
+	"rcarriga/nvim-notify",
+	-- optional: only load when first used
+	-- lazy = true,
+	config = function()
+	  local notify = require("notify")
+
+	  notify.setup({
+	    -- a few common options (all optional):
+	    -- render = "minimal",
+	    -- stages = "fade_in_slide_out",
+	    -- timeout = 2000,
+	    -- background_colour = "#000000",
+	  })
+
+	      -- Make Neovim use nvim-notify for vim.notify()
+	    vim.notify = notify
 	  end,
 	},
 
@@ -178,25 +236,35 @@ require("lazy").setup({
 	mru = { enable = false },
 	packages = { enable = false },
         header = {
-' ▄█       ▄██   ▄    ▄████████  ▄██████▄     ▄████████  ▄█     ▄████████ ',
-'███       ███   ██▄ ███    ███ ███    ███   ███    ███ ███    ███    ███ ',
-'███       ███▄▄▄███ ███    █▀  ███    ███   ███    ███ ███▌   ███    █▀  ',
-'███       ▀▀▀▀▀▀███ ███        ███    ███  ▄███▄▄▄▄██▀ ███▌   ███        ',
-'███       ▄██   ███ ███        ███    ███ ▀▀███▀▀▀▀▀   ███▌ ▀███████████ ',
-'███       ███   ███ ███    █▄  ███    ███ ▀███████████ ███           ███ ',
-'███▌    ▄ ███   ███ ███    ███ ███    ███   ███    ███ ███     ▄█    ███ ',
-'█████▄▄██  ▀█████▀  ████████▀   ▀██████▀    ███    ███ █▀    ▄████████▀  ',
-'▀                                           ███    ███                   ',
-							'',
-        },
+		  ' ▄█       ▄██   ▄    ▄████████  ▄██████▄     ▄████████  ▄█     ▄████████ ',
+		  '███       ███   ██▄ ███    ███ ███    ███   ███    ███ ███    ███    ███ ',
+		  '███       ███▄▄▄███ ███    █▀  ███    ███   ███    ███ ███▌   ███    █▀  ',
+		  '███       ▀▀▀▀▀▀███ ███        ███    ███  ▄███▄▄▄▄██▀ ███▌   ███        ',
+		  '███       ▄██   ███ ███        ███    ███ ▀▀███▀▀▀▀▀   ███▌ ▀███████████ ',
+		  '███       ███   ███ ███    █▄  ███    ███ ▀███████████ ███           ███ ',
+		  '███▌    ▄ ███   ███ ███    ███ ███    ███   ███    ███ ███     ▄█    ███ ',
+		  '█████▄▄██  ▀█████▀  ████████▀   ▀██████▀    ███    ███ █▀    ▄████████▀  ',
+		  '▀                                           ███    ███                   ',
+		  '',
+		},
+	    
+	-- header = {
+ --              '  ▄▄▄                                ',
+	--       ' ▀██▀                        ▀▀      ',
+	--       '  ██  ██ ██ ▄███▀ ▄███▄ ████▄██ ▄██▀█',
+	--       '  ██  ██▄██ ██    ██ ██ ██   ██ ▀███▄',
+	--       ' ████▄▄▀██▀▄▀███▄▄▀███▀▄█▀  ▄███▄▄██▀',
+	--       '        ██                           ',
+	--       '      ▀▀▀                            ',
+	--     }, 
+	             
         shortcut = {
           { desc = '󰉋 Files ', group = 'Label', key = 'f', action = 'NvimTreeToggle' },
-          { desc = '󰭎 Search ',  group = 'Label', key = 'g', action = 'Telescope live_grep' },
-		{ desc = '󰝒 New ', group = 'Label', key = 'e', action = 'tabnew' },
-		{ desc = '󰯉 Zsh ', group = 'Label', key = 't', action = 'term'},
-		--{ desc = ' Notes', group = 'Label', key = 'n', action = function() vim.cmd("cd ~/Notes/")	vim.cmd("Telescope find_files")	end,},
-							{ desc = '󰲶 Notes ', group = 'Label', key = 'n', action = cd_notes_subfolder, },
-		{ desc = ' Config ', group = 'Label', key = 'c', action = 'e ~/.config/nvim/init.lua'},
+	  { desc = ' Notes', group = 'label', key = 'n', action = "Telekasten find_notes" },
+          --{ desc = '󰭎 Search ',  group = 'Label', key = 'g', action = 'Telescope live_grep' },
+	  --{ desc = '󰝒 New ', group = 'Label', key = 'e', action = 'tabnew' },
+	  --{ desc = '󰯉 Zsh ', group = 'Label', key = 't', action = 'term'},
+	  { desc = ' Config ', group = 'Label', key = 'c', action = 'e $MYVIMRC'},
         },
 
         footer = {'', '╭───────────────────────╮',' Prefiero morir de pie ',' que vivir en rodillas ','╰───────────────────────╯',' ⚝ ' },
@@ -226,7 +294,7 @@ require("lazy").setup({
 						icons_enabled = true,
     						theme = 'rose-pine',
     						component_separators = { left = '', right = ''},
-    						section_separators = { left = ' ', right = ' '},
+    						section_separators = { left = ' ', right = ' '},
     					disabled_filetypes = {
       statusline = {},
       winbar = {},
@@ -342,7 +410,7 @@ require("lazy").setup({
 				},
 			},
 				link = {
-					email = " "
+					email = " ",
 				},
 				heading = {
 					sign = false,
@@ -355,7 +423,9 @@ require("lazy").setup({
 				quote = { repeat_linebreak = true },
 				callout = {
 					note      = { raw = '[!NOTE]',      rendered = '󰋽 Note',      highlight = 'RenderMarkdownInfo',    category = 'github'   },
-					sources = { raw = '[!SOURCE]', rendered = ' Source', highlight = 'RendererMarkdownQuote',},
+					sources = { raw = '[!SOURCE]', rendered = ' Source', highlight = 'RendererMarkdownQuote', category = 'github'},
+					client = { raw = '[!CLIENT]', rendered = ' Client', highlight = 'RenderMarkdownLink', category = 'github'},
+					presta = { raw = '[!PRESTA]', rendered = ' PRESTA', highlight = 'RenderMarkdownSuccess', category = 'github'},
 				}
 			},
   },
@@ -513,91 +583,127 @@ vim.keymap.set({"n","v"}, "<leader>k", ":BufferMoveNext<CR>", { desc = "Move buf
 -- You'd be surprised how often I forget how to exit the damned terminal lol
 vim.keymap.set("t", "<C-x>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
 
--- A small(ish) notes thingy
--- Since we're writing a config in lua, might as well take
--- advantage of the fact that it's code, y'know 
--- Helper function
-local function get_vaults(root)
-  root = vim.fn.expand(root)
-  local vaults = {}
+-- Keybinds for telekasten
+--vim.keymap.set("n", "<leader>z", "<cmd>Telekasten panel<CR>")
 
-  -- list entries in the root folder
-  local entries = vim.fn.readdir(root)
-  for _, name in ipairs(entries) do
-    local path = root .. "/" .. name
-    if vim.fn.isdirectory(path) == 1 then
-      table.insert(vaults, path)
-    end
-  end
+vim.keymap.set("n", "<leader>zf", "<cmd>Telekasten find_notes<CR>")
+vim.keymap.set("n", "<leader>zl","<cmd>Telekasten insert_link<CR>")
+vim.keymap.set("n", "<leader>zg", "<cmd>Telekasten search_notes<CR>")
+vim.keymap.set("n", "<leader>zd", "<cmd>Telekasten goto_today<CR>")
+vim.keymap.set("n", "<leader>zz", "<cmd>Telekasten follow_link<CR>")
+vim.keymap.set("n", "<leader>zn", "<cmd>Telekasten new_note<CR>")
+vim.keymap.set("n", "<leader>zc", "<cmd>Telekasten show_calendar<CR>")
+vim.keymap.set("n", "<leader>zb", "<cmd>Telekasten show_backlinks<CR>")
+vim.keymap.set("n", "<leader>zI", "<cmd>Telekasten insert_img_link<CR>")
 
-  return vaults
-end
+-- Create an autocmd for markdown files - opening notes (telekasten)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
 
-
-vim.keymap.set("n", "<leader>n", function()
-  local pickers = require("telescope.pickers")
-  local finders = require("telescope.finders")
-  local conf = require("telescope.config").values
-  local actions = require("telescope.actions")
-  local action_state = require("telescope.actions.state")
-  local builtin = require("telescope.builtin")
-
-  local vaults = get_vaults("~/Notes/")
-
-  pickers.new({}, {
-    prompt_title = "Select Notes Folder",
-    finder = finders.new_table(vaults),
-    sorter = conf.generic_sorter({}),
-    attach_mappings = function(prompt_bufnr, map)
-      map("i", "<CR>", function()
-        local entry = action_state.get_selected_entry()
-        actions.close(prompt_bufnr)
-
-        local dir = entry[1]
-
-        -- now open the combined picker for this directory
-        builtin.find_files({
-          prompt_title = "Notes (" .. dir .. ")",
-          cwd = dir,
-          attach_mappings = function(pbuf, map2)
-            map2("i", "<CR>", function()
-              local e = action_state.get_selected_entry()
-              local input = action_state.get_current_line()
-              actions.close(pbuf)
-
-              local filename
-              if e then
-                filename = e.path
-              else
-                filename = vim.fn.expand(dir .. "/" .. input .. ".md")
-              end
-              vim.cmd("edit " .. filename)
-            end)
-            return true
-          end,
-        })
-      end)
-      return true
-    end
-  }):find()
-end)
-
--- New timestamped note 
-local function new_timestamped_note()
-  local dir = vim.fn.expand("%:p:h")
-  if dir == "" then
-    dir = vim.fn.getcwd()
-  end
-
-  local name = os.date("%Y-%m-%d_%H-%M-%S.md")
-  local path = dir .. "/" .. name
-
-  vim.cmd("edit " .. vim.fn.fnameescape(path))
-end
-
--- Keymap
-vim.keymap.set("n", "<leader>nt", new_timestamped_note, {
-  desc = "New timestamped note in current directory"
+    -- Buffer-local mapping
+    vim.keymap.set("n", "<leader><CR>", require("telekasten").follow_link, {
+      buffer = true,
+      silent = true,
+      desc = "Telekasten Follow Link",
+    })
+  end,
 })
 
-vim.api.nvim_create_user_command("NewTimestampedNote", new_timestamped_note, {})
+-- Small markdown-only keybind that lets me write checklists more easily.
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.keymap.set("n", "<leader>m", "<cmd>%s/@cl/- [ ]/ge<CR>", { buffer = true, desc = "Making checklists easily" })
+  end,
+})
+
+
+-- -- A small(ish) notes thingy
+-- -- Since we're writing a config in lua, might as well take
+-- -- advantage of the fact that it's code, y'know 
+-- -- Helper function
+-- local function get_vaults(root)
+--   root = vim.fn.expand(root)                    
+--   local vaults = {}
+--
+--   -- list entries in the root folder
+--   local entries = vim.fn.readdir(root)
+--   for _, name in ipairs(entries) do
+--     local path = root .. "/" .. name
+--     if vim.fn.isdirectory(path) == 1 then
+--       table.insert(vaults, path)
+--     end
+--   end
+--
+--   return vaults
+-- end
+--
+--
+-- vim.keymap.set("n", "<leader>n", function()
+--   local pickers = require("telescope.pickers")
+--   local finders = require("telescope.finders")
+--   local conf = require("telescope.config").values
+--   local actions = require("telescope.actions")
+--   local action_state = require("telescope.actions.state")
+--   local builtin = require("telescope.builtin")
+--
+--   local vaults = get_vaults("~/Notes/")
+--
+--   pickers.new({}, {
+--     prompt_title = "Select Notes Folder",
+--     finder = finders.new_table(vaults),
+--     sorter = conf.generic_sorter({}),
+--     attach_mappings = function(prompt_bufnr, map)
+--       map("i", "<CR>", function()
+--         local entry = action_state.get_selected_entry()
+--         actions.close(prompt_bufnr)
+--
+--         local dir = entry[1]
+--
+--         -- now open the combined picker for this directory
+--         builtin.find_files({
+--           prompt_title = "Notes (" .. dir .. ")",
+--           cwd = dir,
+--           attach_mappings = function(pbuf, map2)
+--             map2("i", "<CR>", function()
+--               local e = action_state.get_selected_entry()
+--               local input = action_state.get_current_line()
+--               actions.close(pbuf)
+--
+--               local filename
+--               if e then
+--                 filename = e.path
+--               else
+--                 filename = vim.fn.expand(dir .. "/" .. input .. ".md")
+--               end
+--               vim.cmd("edit " .. filename)
+--             end)
+--             return true
+--           end,
+--         })
+--       end)
+--       return true
+--     end
+--   }):find()
+-- end)
+--
+-- -- New timestamped note 
+-- local function new_timestamped_note()
+--   local dir = vim.fn.expand("%:p:h")
+--   if dir == "" then
+--     dir = vim.fn.getcwd()
+--   end
+--
+--   local name = os.date("%Y-%m-%d_%H-%M-%S.md")
+--   local path = dir .. "/" .. name
+--
+--   vim.cmd("edit " .. vim.fn.fnameescape(path))
+-- end
+--
+-- -- Keymap
+-- vim.keymap.set("n", "<leader>nt", new_timestamped_note, {
+--   desc = "New timestamped note in current directory"
+-- })
+--
+-- vim.api.nvim_create_user_command("NewTimestampedNote", new_timestamped_note, {})
