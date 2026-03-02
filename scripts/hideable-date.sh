@@ -22,7 +22,7 @@ case "$1" in
     rm "$FLAG"
     ;;
   *)
-    if [[ -f "$FLAG" ]]; then 
+    if ! [[ -f "$FLAG" ]]; then 
       echo "$(date +'%H:%M:%S')"
     else
       echo "𝓣𝓲𝓶𝓮  𝓲𝓼  𝓪𝓷  𝓲𝓵𝓵𝓾𝓼𝓲𝓸𝓷"

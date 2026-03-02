@@ -100,13 +100,6 @@ window-rule {
     }
 }
 
-window-rule {
-    match title="Kando Menu"
-    open-floating true
-    border { off; }
-    shadow { off; }
-}
-
 cursor {
   xcursor-theme "BreezeX-RosePine-Linux"
   xcursor-size 42
@@ -145,15 +138,17 @@ output "HDMI-A-1" {
 }
 
 output "DP-2" {
-  mode "1920x1080@60.000"
-  scale 1
-  //position x=1920 y=-1080
-}
+  scale 1 
+  position x=1680 y=-1080
+  transform "270"
+}   
 
 output "DP-1" {
   scale 1 
-  position x=1920 y=-1080
+  position x=1680 y=-1080
+  transform "270"
 }
+
 
 output "DSI-1" {
   scale 2 
@@ -178,7 +173,7 @@ layer-rule {
 }
 
 overview {
-  zoom 0.42
+  zoom 0.3
   workspace-shadow {
     off
   }
@@ -281,13 +276,13 @@ layout {
 
         width 4
         active-color "#ffc87f"
-        inactive-gradient from="#c4a7e7" to="#ebbcba" angle=42
+        inactive-gradient from="#9ccfd8" to="#31748f" angle=42 
 
         // Color of the border around windows that request your attention.
         urgent-color "#9b0000"
 
-        // active-gradient from="#ffbb66" to="#ffc880" angle=45 relative-to="workspace-view"
-        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+        // active-gradient from="#ffbb66" to="#ffc880" angle=45
+        // inactive-gradient from="#505050" to="#808080" angle=45
     }
 
     // You can enable drop shadows for windows.
@@ -405,6 +400,7 @@ environment {
   ELECTRON_OZONE_PLATFORM_HINT "auto"
   XDG_CURRENT_DESKTOP "PLASMA"
   LOCATION "Germany"
+  GTK_THEME "rose-pine-gtk"
 }
 
 // Add lines like this to spawn processes at startup.
@@ -422,9 +418,9 @@ spawn-sh-at-startup "udiskie -t"
 spawn-at-startup "nm-applet"
 
 spawn-at-startup "/home/camille/.cargo/bin/chameleos"
-spawn-at-startup "/home/camille/.cargo/bin/chamel" "stroke-color" "'#eb6f92'"
+spawn-sh-at-startup "/home/camille/.cargo/bin/chamel stroke-color '#eb6f92'"
 
-spawn-at-startup "dunst"
+spawn-at-startup "mako"
 
 spawn-sh-at-startup "kleopatra --daemon"
 
@@ -435,6 +431,12 @@ spawn-at-startup "swww-daemon"
 spawn-sh-at-startup "wl-paste --type text --watch cliphist store"
 
 spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
+
+spawn-sh-at-startup "tailscale systray"
+
+spawn-sh-at-startup "signal-desktop --password-store=\"kwallet6\""
+
+spawn-sh-at-startup "steam"
 
 //spawn-sh-at-startup "swaybg -i ~/Pictures/Wallpapers/overview"
 
@@ -614,6 +616,7 @@ binds {
     Mod+Return hotkey-overlay-title="Open a Terminal : kitty" { spawn "kitty" "--title" "Kitty"; }
     Mod+Z hotkey-overlay-title=null { spawn "kitten" "quick-access-terminal" "ai.sh" "-c" ; }
     Mod+D hotkey-overlay-title="Rofi" { spawn "rofi" "-show" "drun"; }
+    Mod+Shift+D hotkey-overlay-title=null { spawn "anyrun"; }
     //Mod+D hotkey-overlay-title="Run an Application : dmenu" { spawn "rofi" "-show" "drun" "-run-command" "/home/camille/.config/scripts/niri-test.sh '{cmd}'"; }
     Mod+Shift+Tab { spawn "kitten" "quick-access-terminal";}
     Mod+Shift+X hotkey-overlay-title="Clipboard shenanigans" { spawn "~/.config/scripts/clipboard-utils.sh" ;}
@@ -621,7 +624,7 @@ binds {
     Mod+Shift+Q hotkey-overlay-title="Qute" { spawn "qutebrowser"; }
     Mod+K hotkey-overlay-title="Kleopatra" { spawn "kleopatra"; }
     Mod+E hotkey-overlay-title="Neovide" { spawn "neovide"; }
-    Mod+Shift+E hotkey-overlay-title="Dolphin (for now)" { spawn "dolphin"; }
+    Mod+Shift+E hotkey-overlay-title="Dolphin (for now)" { spawn "thunar"; }
     Mod+Shift+O hotkey-overlay-title="Obsidian" { spawn "obsidian"; }
     Mod+Space hotkey-overlay-title=null {spawn "~/.config/scripts/hideable-date.sh" "-tt"; }   
     Mod+Alt+Space hotkey-overlay-title="Toggle time widget" {spawn "~/.config/scripts/hideable-date.sh" "-t"; }

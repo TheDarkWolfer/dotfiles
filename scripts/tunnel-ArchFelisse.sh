@@ -8,6 +8,7 @@ PORTS=(
 	-L 9091:localhost:9000
 	-L 8096:localhost:8096
 	-L 24454:localhost:24454
+	-L 5678:localhost:5678
 	)
 
 case "$1" in 
@@ -23,6 +24,7 @@ case "$1" in
 			-L 8096:localhost:8096 \
 			-L 9091:localhost:9000 \
 			-L 24454:localhost:24454 \
+			-L 5678:localhost:5678 \
 			$USER@$IP -p $PORT &
 		echo "$!" > "$PIDFILE"
 		echo -e "Tunnel home is up and running !"
@@ -41,6 +43,7 @@ case "$1" in
 				-L 9091:localhost:9000 \
 				-L 8096:localhost:8096 \
 				-L 24454:localhost:24454 \
+				-L 5678:localhost:5678 \
 				$USER@$IP -p $PORT -i $KEYFILE &
 			echo "$!" > "$PIDFILE"
 			#echo -e "Tunnel home is up and running !"

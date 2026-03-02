@@ -6,7 +6,18 @@ else
 	TUNNEL_CHOICE="󰌷 Open tunnel to Arch-Félisse"
 fi
 
-choice=$(echo -e " Kaomojis\n$TUNNEL_CHOICE\n󰈊 Color Picker\n ANSI box\n Transfer Photos\n Download video\n Download audio\n󰆄 Ascii to binary\n󰆄 Binary to ascii\n USB Thief" | rofi -dmenu -p "Quick Actions")
+# Wanted to make reading the entries that much easier
+choice=$(echo -e "\
+ Kaomojis
+$TUNNEL_CHOICE
+󰈊 Color Picker
+ ANSI box
+ Transfer Photos
+ Download video
+ Download audio
+󰆄 Ascii to binary
+󰆄 Binary to ascii
+ USB Thief" | rofi -dmenu -p "Quick Actions")
 
 # Old options I'm not using that much anymore
 #  /* Box */
@@ -52,21 +63,21 @@ copy_photos() {
 
 
 case "$choice" in
-	" Kaomojis")
-		cat ~/kaomoji.md | grep -v '[#`\n]' | rofi -dmenu -p "Pick a kaomoji ^.^" -theme-str '#inputbar { enabled : false; } ' | wl-copy -n
-		;;
-	"$TUNNEL_CHOICE")
-		~/.config/scripts/tunnel-ArchFelisse.sh
-		;;
+  " Kaomojis")
+    cat ~/kaomoji.md | grep -v '[#`\n]' | rofi -dmenu -p "Pick a kaomoji ^.^" -theme-str '#inputbar { enabled : false; } ' | wl-copy -n
+    ;;
+  "$TUNNEL_CHOICE")
+    ~/.config/scripts/tunnel-ArchFelisse.sh
+    ;;
   " /* Box */")
     process_clipboard jstone
     ;;
   " ANSI box")
     process_clipboard ansi-rounded
     ;;
-	"󰈊 Color Picker")
-		hyprpicker -af hex
-		;;
+  "󰈊 Color Picker")
+    hyprpicker -af hex
+    ;;
   " Transfer Photos")
     copy_photos
     ;;
@@ -80,7 +91,7 @@ case "$choice" in
     wl-paste | xxd -b | cut -d' ' -f2-7 | tr -d '\n ' | wl-copy
     ;;
   "󰆄 Binary to ascii")
-    #wl-paste | sed 's/.\{8\}/& /g' | xxd -r -b | wl-copy
+    wl-paste | sed 's/.\{8\}/& /g' | xxd -r -b | wl-copy
     
     wl-paste | grep -oE '.{8}' | while read b; do printf "%b" "$(printf "\\x%02X" "$((2#$b))")"; done | wl-copy
     ;;
