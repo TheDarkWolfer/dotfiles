@@ -24,7 +24,7 @@
         "break",
         {
             "type": "custom",
-            "format": "┌{$1} {#1}System Information{#} {$1}┐"
+            "format": "╭{$1} {#1}System Information{#} {$1}╮"
         },
         "break",
         {
@@ -86,7 +86,7 @@
         "break",
         {
             "type": "custom",
-            "format": "└{$1}────────────────────{$1}┘"
+            "format": "╰{$1}────────────────────{$1}╯"
         },
 				"break",
         {
