@@ -33,23 +33,7 @@ vim.filetype.add({
   },
 })
 
--- Function to handle my notes better, by letting me pick which
--- note subfolder to focus on
 
-local function cd_notes_subfolder()
-  require('telescope.builtin').find_files({
-    prompt_title = 'Notes folders',
-    cwd = '~/Notes',
-    find_command = {
-      'find',
-      '.',
-      '-maxdepth', '1',
-      '-type', 'd',
-      '!',
-      '-name', '.',
-    },
-  })
-end
 
 -- Keep selection when indenting in Visual mode
 vim.keymap.set("v", ">", ">gv", { noremap = true, silent = true })
@@ -233,7 +217,7 @@ require("lazy").setup({
       theme = 'hyper',        -- or 'doom'
       config = {
 	project = { enable = false },
-	mru = { enable = false },
+	mru = { enable = false, limit = 7, icon = ' ' },
 	packages = { enable = false },
         header = {
 		  ' ▄█       ▄██   ▄    ▄████████  ▄██████▄     ▄████████  ▄█     ▄████████ ',
@@ -259,7 +243,7 @@ require("lazy").setup({
 	--     }, 
 	             
         shortcut = {
-          { desc = '󰉋 Files ', group = 'Label', key = 'f', action = 'NvimTreeToggle' },
+          { desc = '󰉋 Files ', group = 'Label', key = 'f', action = 'Telescope find_files' },
 	  { desc = ' Notes', group = 'label', key = 'n', action = "Telekasten find_notes" },
           --{ desc = '󰭎 Search ',  group = 'Label', key = 'g', action = 'Telescope live_grep' },
 	  --{ desc = '󰝒 New ', group = 'Label', key = 'e', action = 'tabnew' },
@@ -587,7 +571,7 @@ vim.keymap.set("t", "<C-x>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
 --vim.keymap.set("n", "<leader>z", "<cmd>Telekasten panel<CR>")
 
 vim.keymap.set("n", "<leader>zf", "<cmd>Telekasten find_notes<CR>")
-vim.keymap.set("n", "<leader>zl","<cmd>Telekasten insert_link<CR>")
+vim.keymap.set("n", "<leader>zl", "<cmd>Telekasten insert_link<CR>")
 vim.keymap.set("n", "<leader>zg", "<cmd>Telekasten search_notes<CR>")
 vim.keymap.set("n", "<leader>zd", "<cmd>Telekasten goto_today<CR>")
 vim.keymap.set("n", "<leader>zz", "<cmd>Telekasten follow_link<CR>")
@@ -618,92 +602,22 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- Function to insert templates in an existing note
+local function insert_template()
+    local templates_dir = vim.fn.expand("~/Notes/templates")
+    require("telescope.builtin").find_files({
+        prompt_title = "Insert Template",
+        cwd = templates_dir,
+        attach_mappings = function(_, map)
+            map("i", "<CR>", function(prompt_bufnr)
+                local selection = require("telescope.actions.state").get_selected_entry()
+                require("telescope.actions").close(prompt_bufnr)
+                vim.cmd("read " .. templates_dir .. "/" .. selection.value)
+            end)
+            return true
+        end,
+    })
+end
 
--- -- A small(ish) notes thingy
--- -- Since we're writing a config in lua, might as well take
--- -- advantage of the fact that it's code, y'know 
--- -- Helper function
--- local function get_vaults(root)
---   root = vim.fn.expand(root)                    
---   local vaults = {}
---
---   -- list entries in the root folder
---   local entries = vim.fn.readdir(root)
---   for _, name in ipairs(entries) do
---     local path = root .. "/" .. name
---     if vim.fn.isdirectory(path) == 1 then
---       table.insert(vaults, path)
---     end
---   end
---
---   return vaults
--- end
---
---
--- vim.keymap.set("n", "<leader>n", function()
---   local pickers = require("telescope.pickers")
---   local finders = require("telescope.finders")
---   local conf = require("telescope.config").values
---   local actions = require("telescope.actions")
---   local action_state = require("telescope.actions.state")
---   local builtin = require("telescope.builtin")
---
---   local vaults = get_vaults("~/Notes/")
---
---   pickers.new({}, {
---     prompt_title = "Select Notes Folder",
---     finder = finders.new_table(vaults),
---     sorter = conf.generic_sorter({}),
---     attach_mappings = function(prompt_bufnr, map)
---       map("i", "<CR>", function()
---         local entry = action_state.get_selected_entry()
---         actions.close(prompt_bufnr)
---
---         local dir = entry[1]
---
---         -- now open the combined picker for this directory
---         builtin.find_files({
---           prompt_title = "Notes (" .. dir .. ")",
---           cwd = dir,
---           attach_mappings = function(pbuf, map2)
---             map2("i", "<CR>", function()
---               local e = action_state.get_selected_entry()
---               local input = action_state.get_current_line()
---               actions.close(pbuf)
---
---               local filename
---               if e then
---                 filename = e.path
---               else
---                 filename = vim.fn.expand(dir .. "/" .. input .. ".md")
---               end
---               vim.cmd("edit " .. filename)
---             end)
---             return true
---           end,
---         })
---       end)
---       return true
---     end
---   }):find()
--- end)
---
--- -- New timestamped note 
--- local function new_timestamped_note()
---   local dir = vim.fn.expand("%:p:h")
---   if dir == "" then
---     dir = vim.fn.getcwd()
---   end
---
---   local name = os.date("%Y-%m-%d_%H-%M-%S.md")
---   local path = dir .. "/" .. name
---
---   vim.cmd("edit " .. vim.fn.fnameescape(path))
--- end
---
--- -- Keymap
--- vim.keymap.set("n", "<leader>nt", new_timestamped_note, {
---   desc = "New timestamped note in current directory"
--- })
---
--- vim.api.nvim_create_user_command("NewTimestampedNote", new_timestamped_note, {})
+-- And map it to a keybind 
+vim.keymap.set("n","<leader>zt", insert_template, {desc = "Insert template here"})
